@@ -7,7 +7,7 @@
     {
     @Html.AntiForgeryToken()
         <li>
-            <a href="#">
+            <a href="@Url.Action("RedirectToProfile", "Home")">
                 <i class="fa fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>

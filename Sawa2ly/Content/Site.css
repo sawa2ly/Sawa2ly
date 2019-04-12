@@ -33,11 +33,11 @@ select,
 .profile-userpic img {
   float: none;
   margin: 0 auto;
-  width: 50%;
-  height: 50%;
-  -webkit-border-radius: 50% !important;
-  -moz-border-radius: 50% !important;
-  border-radius: 50% !important;
+  width: 180px;
+  height: 180px;
+  -webkit-border-radius: 90px !important;
+  -moz-border-radius: 90px !important;
+  border-radius: 90px !important;
 }
 
 .profile-usertitle {
@@ -357,7 +357,7 @@ span.meta_date:hover, span.meta_comment:hover, span.meta_more:hover, span.meta_c
 /*-----------------------------chiller-theme-------------------------------------------------*/
 
 .chiller-theme .sidebar-wrapper {
-    background: #31353D;
+    background: #F8F8F8;
 }
 
 .chiller-theme .sidebar-wrapper .sidebar-header,
