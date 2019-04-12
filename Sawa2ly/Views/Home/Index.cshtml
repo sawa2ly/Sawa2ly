@@ -1,13 +1,17 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@using Sawa2ly.Extensions
 
 <head>
 
 </head>
 @if (Request.IsAuthenticated)
 {
-    @Html.Partial("_CreateProject")
+    if (User.Identity.GetUserRule() == "1")
+    {
+        @Html.Partial("_CreateProject")
+    }
         <!-- Unassigned Projects -->
     <section id="team" class="pb-5">
         <div class="container">
