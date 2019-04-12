@@ -14,8 +14,14 @@ namespace Sawa2ly.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+            userIdentity.AddClaim(new Claim("UserRule", this.UserRule.ToString()));
+            userIdentity.AddClaim(new Claim("FName", this.UserRule.ToString()));
+            userIdentity.AddClaim(new Claim("LName", this.UserRule.ToString()));
             return userIdentity;
         }
+        public string FName { get; set; }
+        public string LName { get; set; }
+        public string UserRule { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

@@ -122,7 +122,19 @@
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
+                        @Html.TextBoxFor(m => m.FName, new { @class = "form-control", placeholder = "First Name" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.LName, new { @class = "form-control", placeholder = "Last Name" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = "Mobile Number" })
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
@@ -133,6 +145,16 @@
                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
                         @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                     </div>
+                    <div class="form-group">
+                        @Html.DropDownList("UserRule", new List<SelectListItem>
+                        {
+                            new SelectListItem{ Text="Customer", Value = "1" },
+                            new SelectListItem{ Text="Markting Director", Value = "2" },
+                            new SelectListItem{ Text="Markting Team Leader", Value = "3" },
+                            new SelectListItem{ Text="Markting Trainee", Value = "3" },
+                         }, new { @class = "form-control" }) 
+                    </div>
+
                     <button type="submit" class="btn btn-primary" style="margin-bottom:10px">Register</button>
                     <p>
                         @Html.ActionLink("Allready has an account ?", "Login", "Account")

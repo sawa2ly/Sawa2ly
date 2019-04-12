@@ -151,7 +151,7 @@ namespace Sawa2ly.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName=model.Email, Email=model.Email , FName=model.FName , LName=model.LName , PhoneNumber=model.PhoneNumber , UserRule=model.UserRule};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
