@@ -255,6 +255,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Sources\blur.jpg" />
+    <Content Include="Sources\home.jpg" />
+    <Content Include="Sources\images.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -302,6 +305,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Sources\fontawesome-free-5.8.1-web\" />
     <Folder Include="Views\CustomersDash\" />
   </ItemGroup>
   <ItemGroup>
