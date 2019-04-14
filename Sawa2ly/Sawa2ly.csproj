@@ -302,11 +302,12 @@
     <Content Include="Views\MTS\Index.cshtml" />
     <Content Include="Views\MTL\Index.cshtml" />
     <Content Include="Views\MD\Index.cshtml" />
+    <Content Include="Views\CustomersDash\_LayoutC.cshtml" />
+    <Content Include="Views\CustomersDash\_navC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Sources\fontawesome-free-5.8.1-web\" />
-    <Folder Include="Views\CustomersDash\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
