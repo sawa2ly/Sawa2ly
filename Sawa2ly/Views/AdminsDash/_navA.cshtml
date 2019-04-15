@@ -1,4 +1,5 @@
-﻿
+﻿@using Sawa2ly.Extensions;
+
 <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
         <div class="sidebar-menu">
@@ -8,9 +9,90 @@
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span>E-commerce</span>
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
                     </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="far fa-edit"></i>
+                        <span>Edit Profile</span>
+                    </a>
+                </li>
+                @if (User.Identity.GetUserRule() == "5") //Admin
+                {
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-users"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-paste"></i>
+                            <span>Projects</span>
+                        </a>
+                    </li>
+                }
+
+                @if (User.Identity.GetUserRule() == "2") // MD
+                {
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-compass "></i>
+                            <span>Discover Projects</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-paste"></i>
+                            <span>Current Projects</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-paste"></i>
+                            <span>Previous Projects</span>
+                        </a>
+                    </li>
+                }
+
+                @if (User.Identity.GetUserRule() == "3") // MTL
+                {
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-paste"></i>
+                            <span>Current Projects</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-paste"></i>
+                            <span>Previous Projects</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-flag"></i>
+                            <span>Requests</span>
+                        </a>
+                    </li>
+
+                }
+
+
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"}))
+                {
+                @Html.AntiForgeryToken()
+                <li>
+                    <a href="javascript:document.getElementById('logoutForm').submit()">
+                        <i class="fa fa-sign-out-alt "></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+                }
+                <li class="header-menu">
+                    <span>Extra</span>
                 </li>
                 <li>
                     <a href="#">
@@ -18,25 +100,10 @@
                         <span>Instructions</span>
                     </a>
                 </li>
-                <li class="header-menu">
-                    <span>Extra</span>
-                </li>
                 <li>
                     <a href="#">
-                        <i class="fa fa-book"></i>
-                        <span>About Website</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("About", "Home")">
-                        <i class="fa fa-calendar"></i>
-                        <span>About Us</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Contact", "Home")">
-                        <i class="fa fa-folder"></i>
-                        <span>Contact Us</span>
+                        <i class="fa fa-phone"></i>
+                        <span>Contact Developers</span>
                     </a>
                 </li>
             </ul>
