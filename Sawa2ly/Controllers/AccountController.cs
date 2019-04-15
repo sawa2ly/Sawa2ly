@@ -57,8 +57,16 @@ namespace Sawa2ly.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            if (!Request.IsAuthenticated)
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
         //
@@ -139,7 +147,15 @@ namespace Sawa2ly.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            if (!Request.IsAuthenticated)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+                
         }
 
         //
