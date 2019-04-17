@@ -4,14 +4,33 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Sawa2ly.Extensions;
+using Sawa2ly.Models;
 
 namespace Sawa2ly.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
-            return View();
+            if (!Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "WelcomeHome");
+            }
+
+            return View(db.Project.ToList());
+            
+        }
+
+        [HttpPost]
+        public ActionResult Save(string ProjectName, string ProjectDesc)
+        {
+
+            var customerid = User.Identity.GetUserID();
+            db.Project.Add(new Project { Name = ProjectName, Description = ProjectDesc, CustomerId = customerid });
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult About()

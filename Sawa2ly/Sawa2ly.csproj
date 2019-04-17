@@ -203,6 +203,7 @@
     <Compile Include="Controllers\MDController.cs" />
     <Compile Include="Controllers\MTLController.cs" />
     <Compile Include="Controllers\MTSController.cs" />
+    <Compile Include="Controllers\WelcomeHomeController.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -317,6 +318,9 @@
     <Content Include="Views\MD\Index.cshtml" />
     <Content Include="Views\CustomersDash\_LayoutC.cshtml" />
     <Content Include="Views\CustomersDash\_navC.cshtml" />
+    <Content Include="Views\WelcomeHome\Index.cshtml" />
+    <Content Include="Views\WelcomeHome\_Layout.cshtml" />
+    <Content Include="Views\WelcomeHome\_navWelcome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

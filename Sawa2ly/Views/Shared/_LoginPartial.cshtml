@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @using Sawa2ly.Models
-@model LoginViewModel
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"}))
@@ -31,55 +31,7 @@ else
   
 }
 
-<div class="modal fade" id="popUpWindow">
-    <div class="row">
-        <div>
-            <section id="loginForm">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <!-- header -->
-                        <div class="modal-header">
-                            <h3 class="modal-title">Login</h3>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <!-- body -->
 
-                        <div id="LoginForm">
-                            <div class="container-fluid">
-                                <div class="login-form">
-                                    <div class="">
-                                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
-                                        {
-                                            @Html.AntiForgeryToken()
-                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
-                                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                            </div>
-                                            <div class="form-group">
-                                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
-                                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                            </div>
-                                            <button type="submit" class="btn btn-primary" style="margin-bottom:10px">Login</button>
-                                            <p>
-                                                @Html.ActionLink("Register as a new user", "Register" , "Account" )
-                                            </p>
-                                        }
-                                            
-                                        
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-</div>
 
 
   
