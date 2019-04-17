@@ -17,11 +17,13 @@ namespace Sawa2ly.Models
             userIdentity.AddClaim(new Claim("UserRule", this.UserRule.ToString()));
             userIdentity.AddClaim(new Claim("FName", this.FName.ToString()));
             userIdentity.AddClaim(new Claim("LName", this.LName.ToString()));
+            userIdentity.AddClaim(new Claim("UserImageUrl", this.UserImageUrl.ToString()));
             return userIdentity;
         }
         public string FName { get; set; }
         public string LName { get; set; }
         public string UserRule { get; set; }
+        public string UserImageUrl { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -35,5 +37,11 @@ namespace Sawa2ly.Models
         {
             return new ApplicationDbContext();
         }
+        public System.Data.Entity.DbSet<Sawa2ly.Models.Project> Project { get; set; }
+        public System.Data.Entity.DbSet<Sawa2ly.Models.ProjectModule> ProjectModule { get; set; }
+        public System.Data.Entity.DbSet<Sawa2ly.Models.ProjectTrainees> ProjectTrainees { get; set; }
+        public System.Data.Entity.DbSet<Sawa2ly.Models.ProjectRequestsMD> ProjectRequestsMD { get; set; }
+        public System.Data.Entity.DbSet<Sawa2ly.Models.ProjectsJoinRequests> ProjectsJoinRequests { get; set; }
+
     }
 }
