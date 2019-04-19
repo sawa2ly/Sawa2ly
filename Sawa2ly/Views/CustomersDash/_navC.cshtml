@@ -10,39 +10,76 @@
                 </div>
             </div>
         </header>
-        <div class="container-fluid" style="background-color:#efefef">
+        <div class="container-fluid" style="background-color:#f8f8f8;border-top: 1px solid #dfdfdf;">
             <div class="collapse navbar-collapse" id="navbar-collapse-2" style="padding:10px">
                 <ul class="nav navbar-nav" style="flex-direction:row">
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-home"></i>
-                            <span>Home</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="far fa-edit"></i>
-                            <span>Edit Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-paste"></i>
-                            <span>Current Projects</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-paste"></i>
-                            <span>Previous Projects</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-flag"></i>
-                            <span>Requests</span>
-                        </a>
-                    </li>
+
+                    @if (User.Identity.GetUserRule() == "1")
+                    {
+                        <li>
+                            <a href="@Url.Action("Index", "Customer")">
+                                <i class="fa fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="far fa-edit"></i>
+                                <span>Edit Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("unassignedProjects", "Customer")">
+                                <i class="fa fa-paste"></i>
+                                <span>Unassigned Projects</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("DeliveredProjects", "Customer")">
+                                <i class="fa fa-paste"></i>
+                                <span>Delivered Projects</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Requests", "Customer")">
+                                <i class="fa fa-flag"></i>
+                                <span>Requests</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="@Url.Action("Index", "MTS")">
+                                <i class="fa fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="far fa-edit"></i>
+                                <span>Edit Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("CurrentProjects", "MTS")">
+                                <i class="fa fa-paste"></i>
+                                <span>Current Projects</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("PreviousProjects", "MTS")">
+                                <i class="fa fa-paste"></i>
+                                <span>Previous Projects</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Requests", "MTS")">
+                                <i class="fa fa-flag"></i>
+                                <span>Requests</span>
+                            </a>
+                        </li>
+                    }
                     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" , @class = "btn btn-default btn-outline btn-circle collapsed" }))
                     {
                         @Html.AntiForgeryToken()

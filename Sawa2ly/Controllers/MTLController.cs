@@ -22,5 +22,49 @@ namespace Sawa2ly.Controllers
             }
             
         }
+
+        // GET: MTL/CurrentProjects
+        public ActionResult CurrentProjects()
+        {
+            if (User.Identity.GetUserRule() == "3")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("RedirectToProfile", "Home");
+            }
+
+        }
+
+        // GET: MTL/PreviousProjects
+        public ActionResult PreviousProjects()
+        {
+            if (User.Identity.GetUserRule() == "3")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("RedirectToProfile", "Home");
+            }
+
+        }
+
+        // GET: MTL/Requests
+        public ActionResult Requests()
+        {
+            if (User.Identity.GetUserRule() == "3")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("RedirectToProfile", "Home");
+            }
+
+        }
+
+
     }
 }

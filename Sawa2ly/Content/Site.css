@@ -489,6 +489,8 @@ section .section-title {
     position: relative;
     -webkit-transform: rotateY(0deg);
     -ms-transform: rotateY(0deg);
+    height:312px;
+    width:230.5px;
     z-index: 2;
     margin-bottom: 30px;
 }
@@ -498,6 +500,9 @@ section .section-title {
     top: 0;
     left: 0;
     background: white;
+    height:312px;
+    width:230.5px;
+    overflow-y:scroll;
     -webkit-transform: rotateY(-180deg);
     -moz-transform: rotateY(-180deg);
     -o-transform: rotateY(-180deg);

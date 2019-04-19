@@ -7,20 +7,20 @@
                 <li class="header-menu">
                     <span>General</span>
                 </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-home"></i>
-                        <span>Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="far fa-edit"></i>
-                        <span>Edit Profile</span>
-                    </a>
-                </li>
                 @if (User.Identity.GetUserRule() == "5") //Admin
                 {
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="far fa-edit"></i>
+                            <span>Edit Profile</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="#">
                             <i class="fa fa-users"></i>
@@ -38,19 +38,31 @@
                 @if (User.Identity.GetUserRule() == "2") // MD
                 {
                     <li>
+                        <a href="@Url.Action("Index", "MD")">
+                            <i class="fa fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="#">
+                            <i class="far fa-edit"></i>
+                            <span>Edit Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("DiscoverProjects", "MD")">
                             <i class="fa fa-compass "></i>
                             <span>Discover Projects</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="@Url.Action("CurrentProjects", "MD")">
                             <i class="fa fa-paste"></i>
                             <span>Current Projects</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="@Url.Action("PreviousProjects", "MD")">
                             <i class="fa fa-paste"></i>
                             <span>Previous Projects</span>
                         </a>
@@ -60,19 +72,31 @@
                 @if (User.Identity.GetUserRule() == "3") // MTL
                 {
                     <li>
+                        <a href="@Url.Action("Index", "MTL")">
+                            <i class="fa fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="#">
+                            <i class="far fa-edit"></i>
+                            <span>Edit Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("CurrentProjects", "MTL")">
                             <i class="fa fa-paste"></i>
                             <span>Current Projects</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="@Url.Action("PreviousProjects", "MTL")">
                             <i class="fa fa-paste"></i>
                             <span>Previous Projects</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="@Url.Action("Requests", "MTL")">
                             <i class="fa fa-flag"></i>
                             <span>Requests</span>
                         </a>

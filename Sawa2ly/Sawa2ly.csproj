@@ -321,6 +321,18 @@
     <Content Include="Views\WelcomeHome\Index.cshtml" />
     <Content Include="Views\WelcomeHome\_Layout.cshtml" />
     <Content Include="Views\WelcomeHome\_navWelcome.cshtml" />
+    <Content Include="Views\Customer\unassignedProjects.cshtml" />
+    <Content Include="Views\Customer\DeliveredProjects.cshtml" />
+    <Content Include="Views\Customer\Requests.cshtml" />
+    <Content Include="Views\MTS\CurrentProjects.cshtml" />
+    <Content Include="Views\MTS\PreviousProjects.cshtml" />
+    <Content Include="Views\MTS\Requests.cshtml" />
+    <Content Include="Views\MD\DiscoverProjects.cshtml" />
+    <Content Include="Views\MD\CurrentProjects.cshtml" />
+    <Content Include="Views\MD\PreviousProjects.cshtml" />
+    <Content Include="Views\MTL\CurrentProjects.cshtml" />
+    <Content Include="Views\MTL\PreviousProjects.cshtml" />
+    <Content Include="Views\MTL\Requests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

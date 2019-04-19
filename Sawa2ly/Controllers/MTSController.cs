@@ -20,7 +20,50 @@ namespace Sawa2ly.Controllers
             {
                 return RedirectToAction("RedirectToProfile", "Home");
             }
-                
+
         }
+
+        // GET: MTS/CurrentProjects
+        public ActionResult CurrentProjects()
+        {
+            if (User.Identity.GetUserRule() == "4")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("RedirectToProfile", "Home");
+            }
+
+        }
+
+        // GET: MTS/DeliveredProjects
+        public ActionResult PreviousProjects()
+        {
+            if (User.Identity.GetUserRule() == "4")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("RedirectToProfile", "Home");
+            }
+
+        }
+
+        // GET: MTS/Requests
+        public ActionResult Requests()
+        {
+            if (User.Identity.GetUserRule() == "4")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("RedirectToProfile", "Home");
+            }
+
+        }
+
     }
 }
