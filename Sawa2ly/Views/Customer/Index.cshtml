@@ -157,13 +157,13 @@
         <hr/>
         <section class="latest py-5" id="latest">
             <div class="row">
-                <h5 class="section-title h1">Current Projects</h5>
+                <h5 class="section-title h1">Unassigned Projects</h5>
                 <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
                     <div class="MultiCarousel-inner">
 
                         @foreach (var project in Model)
                         {
-                            if (project.CustomerId == User.Identity.GetUserID()) { 
+                            if (project.CustomerId == User.Identity.GetUserID() && project.MDID==null) { 
                                 <div class="item">
 
                                     <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
@@ -201,12 +201,12 @@
         <hr />
         <section class="latest py-5" id="latest">
             <div class="row">
-                <h5 class="section-title h1">Latest Projects</h5>
+                <h5 class="section-title h1">Assigned Projects Projects</h5>
                 <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
                     <div class="MultiCarousel-inner">
                         @foreach (var project in Model)
                         {
-                            if (project.CustomerId == User.Identity.GetUserID())
+                            if (project.CustomerId == User.Identity.GetUserID() && project.MDID != null)
                             {
                                 <div class="item">
 
