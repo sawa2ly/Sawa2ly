@@ -1,0 +1,307 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Project</title>
+    <link href="~/Sources/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="~/Sources/css/bootstrap.min.js"></script>
+    <script src="~/Sources/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/Sources/fontawesome-free-5.8.1-web/css/all.css" crossorigin="anonymous">
+    <style>
+        body{
+            background: -webkit-linear-gradient(left, #529934, #688464);
+        }
+        .emp-profile{
+            padding: 3%;
+            margin-top: 3%;
+            margin-bottom: 3%;
+            border-radius: 0.5rem;
+            background: #fff;
+            min-height:530px;
+        }
+        .profile-img{
+            text-align: center;
+        }
+        .profile-img img{
+            width: 70%;
+            height: 100%;
+        }
+        .profile-img .file {
+            position: relative;
+            overflow: hidden;
+            margin-top: -20%;
+            width: 70%;
+            border: none;
+            border-radius: 0;
+            font-size: 15px;
+            background: #212529b8;
+        }
+        .profile-img .file input {
+            position: absolute;
+            opacity: 0;
+            right: 0;
+            top: 0;
+        }
+        .profile-head h5{
+            color: #333;
+            margin-bottom:80px;
+            font-size: 28px;
+            text-transform: uppercase;
+        }
+        .profile-head h6{
+            color: #0062cc;
+        }
+        .profile-edit-btn{
+            border: none;
+            border-radius: 1.5rem;
+            width: 70%;
+            padding: 2%;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+        }
+        .proile-rating{
+            font-size: 12px;
+            color: #818182;
+            margin-top: 5%;
+        }
+        .proile-rating span{
+            color: #495057;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .profile-head .nav-tabs{
+            margin-bottom:5%;
+        }
+        .profile-head .nav-tabs .nav-link{
+            font-weight:600;
+            border: none;
+        }
+        .profile-head .nav-tabs .nav-link.active{
+            border: none;
+            border-bottom:2px solid #0062cc;
+        }
+        .profile-work{
+            padding: 14%;
+            margin-top: -15%;
+        }
+        .profile-work p{
+            font-size: 12px;
+            color: #818182;
+            font-weight: 600;
+            margin-top: 10%;
+        }
+        .profile-work a{
+            text-decoration: none;
+            color: #495057;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .profile-work ul{
+            list-style: none;
+        }
+        .profile-tab label{
+            font-weight: 600;
+        }
+        .profile-tab p{
+    
+            color: #000;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            First();
+            function First() {
+                $('#home').addClass('active')
+                $('#project').hide();
+                $('#team').hide();
+                $('#posts').hide();
+            }
+            function DisableTabs() {
+                $('#project').hide();
+                $('#team').hide();
+                $('#posts').hide();
+                $('#home').hide();
+                $('#home-tab').removeClass('active');
+                $('#profile-tab').removeClass('active');
+                $('#team-tab').removeClass('active');
+                $('#posts-tab').removeClass('active');
+            }
+            $('.nav-tabs li a[href="#home"]').on('click', function (event) {
+                DisableTabs();
+                var tabid = $(this).attr('href');
+                $('#home-tab').addClass('active');
+                $('#home-tab').siblings().removeClass('active');
+                var tabpanel = $(''+ tabid).show();
+                $(tabpanel).addClass('tab-pane fade show active');
+            });
+            $('.nav-tabs li a[href="#project"]').on('click', function (event) {
+                DisableTabs();
+                var tabid = $(this).attr('href');
+                $('#profile-tab').addClass('nav-link active');
+                $('#profile-tab').siblings().removeClass('nav-link active');
+                var tabpanel = $(''+ tabid).show();
+                $(tabpanel).addClass('tab-pane fade show active');
+            });
+            $('.nav-tabs li a[href="#team"]').on('click', function (event) {
+                DisableTabs();
+                var tabid = $(this).attr('href');
+                $('#team-tab').addClass('active');
+                $('#team-tab').siblings().removeClass('active');
+                var tabpanel = $(''+ tabid).show();
+                $(tabpanel).addClass('tab-pane fade show active');
+            });
+            $('.nav-tabs li a[href="#posts"]').on('click', function (event) {
+                DisableTabs();
+                var tabid = $(this).attr('href');
+                $('#posts-tab').addClass('active');
+                $('#posts-tab').siblings().removeClass('active');
+                var tabpanel = $(''+ tabid).show();
+                $(tabpanel).addClass('tab-pane fade show active');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container emp-profile" style="padding: 30px;">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="~/Sources/images.jpg" alt="" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        Project Name
+                    </h5>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" id="l1">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item" id="l2">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#project" role="tab" aria-controls="profile" aria-selected="false">Project</a>
+                        </li>
+                        <li class="nav-item" id="l3">
+                            <a class="nav-link" id="team-tab" data-toggle="tab" href="#team" role="tab" aria-controls="profile" aria-selected="false">Team</a>
+                        </li>
+                        <li class="nav-item" id="l4">
+                            <a class="nav-link" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="profile" aria-selected="false">Posts</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Back" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>Owner Info</p>
+                    <a>Adel Reda</a><br />
+                    <a>adelredaa97@gmail.com</a><br />
+                    <a>01279767022</a>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel">
+                        <div class="row">
+                            <p>This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="project" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Start Date</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>15-5-1997</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>End Date</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>17-7-1997</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Status</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>on progress, Delivered</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Price</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>150 $</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="team" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Marketing Director</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Adel Reda</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Team Leader</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Ahmed</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Team Trainee</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Mohamed</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Team Trainee</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Mohamed</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Team Trainee</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Mohamed</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="posts" role="tabpanel" aria-labelledby="profile-tab">
+                        Empty
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

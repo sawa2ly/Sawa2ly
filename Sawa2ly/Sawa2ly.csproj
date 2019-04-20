@@ -203,6 +203,7 @@
     <Compile Include="Controllers\MDController.cs" />
     <Compile Include="Controllers\MTLController.cs" />
     <Compile Include="Controllers\MTSController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\WelcomeHomeController.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -333,6 +334,7 @@
     <Content Include="Views\MTL\CurrentProjects.cshtml" />
     <Content Include="Views\MTL\PreviousProjects.cshtml" />
     <Content Include="Views\MTL\Requests.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
