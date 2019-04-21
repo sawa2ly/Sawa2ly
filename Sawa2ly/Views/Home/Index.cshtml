@@ -31,16 +31,18 @@
                                         <p>
                                             <img class="img-fluid" src="~/Sources/images.jpg" alt="card image">
                                         </p>
-                                        <h4 class="card-title">Iphone</h4>
-                                        <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                        <h4 class="card-title">@project.Name</h4>
+                                        <h6 class="card-text">@String.Concat(project.Customer.FName, " ", project.Customer.LName)</h6>
+                                        <h6 class="card-text">@project.Customer.Email</h6>
+                                        <h6 class="card-text">@project.Customer.PhoneNumber</h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="backside">
                                 <div class="card">
                                     <div class="card-body text-center mt-4">
-                                        <h4 class="card-title">Sunlimetech</h4>
-                                        <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
+                                        <h4 class="card-title">@project.Name</h4>
+                                        <p class="card-text">@project.Description</p>
                                     </div>
                                 </div>
                             </div>

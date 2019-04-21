@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using Sawa2ly.Extensions;
+using Sawa2ly.Models;
 
 namespace Sawa2ly.Controllers
 {
     public class CustomerController : Controller
     {
+
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: Customer
         public ActionResult Index()
         {
             if (User.Identity.GetUserRule() == "1")
             {
-                return View();
+                var userId = User.Identity.GetUserID();
+                var project = db.Project.Where( I => I.CustomerId ==  userId).Include(p => p.Customer).ToList();
+                return View(project);
             }
             else
             {
@@ -23,12 +30,23 @@ namespace Sawa2ly.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult Save(string ProjectName, string ProjectDesc)
+        {
+            var customerid = User.Identity.GetUserID();
+            db.Project.Add(new Project { Name = ProjectName, Description = ProjectDesc, CustomerId = customerid });
+            db.SaveChanges();
+            return RedirectToAction("Index", "Customer");
+        }
+
         // GET: Customer/unassignedProjects
         public ActionResult unassignedProjects()
         {
             if (User.Identity.GetUserRule() == "1")
             {
-                return View();
+                var userId = User.Identity.GetUserID();
+                var project = db.Project.Where(I => I.CustomerId == userId && I.MDID == null).Include(p => p.Customer).ToList();
+                return View(project);
             }
             else
             {
@@ -42,7 +60,9 @@ namespace Sawa2ly.Controllers
         {
             if (User.Identity.GetUserRule() == "1")
             {
-                return View();
+                var userId = User.Identity.GetUserID();
+                var project = db.Project.Where(I => I.CustomerId == userId && I.MDID != null).Include(p => p.Customer).ToList();
+                return View(project);
             }
             else
             {

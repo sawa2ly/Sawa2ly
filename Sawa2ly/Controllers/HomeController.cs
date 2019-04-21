@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using Sawa2ly.Extensions;
@@ -19,7 +20,7 @@ namespace Sawa2ly.Controllers
                 return RedirectToAction("Index", "WelcomeHome");
             }
 
-            return View(db.Project.ToList());
+            return View(db.Project.Where(I => I.MDID == null).Include(p => p.Customer).ToList());
             
         }
 

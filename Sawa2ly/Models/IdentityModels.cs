@@ -19,6 +19,8 @@ namespace Sawa2ly.Models
             userIdentity.AddClaim(new Claim("LName", this.LName.ToString()));
             userIdentity.AddClaim(new Claim("UserImageUrl", this.UserImageUrl.ToString()));
             userIdentity.AddClaim(new Claim("Id", this.Id.ToString()));
+            userIdentity.AddClaim(new Claim("Email", this.Email.ToString()));
+            userIdentity.AddClaim(new Claim("PhoneNumber", this.PhoneNumber.ToString()));
             return userIdentity;
         }
         public string FName { get; set; }
