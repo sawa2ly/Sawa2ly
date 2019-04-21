@@ -225,12 +225,23 @@
     <Compile Include="Migrations\201904171158255_dbv1.Designer.cs">
       <DependentUpon>201904171158255_dbv1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904211222168_projectEdit.cs" />
+    <Compile Include="Migrations\201904211222168_projectEdit.Designer.cs">
+      <DependentUpon>201904211222168_projectEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904211226214_projectEdit2.cs" />
+    <Compile Include="Migrations\201904211226214_projectEdit2.Designer.cs">
+      <DependentUpon>201904211226214_projectEdit2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904211228181_projectEdit3.cs" />
+    <Compile Include="Migrations\201904211228181_projectEdit3.Designer.cs">
+      <DependentUpon>201904211228181_projectEdit3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Project.cs" />
-    <Compile Include="Models\ProjectModule.cs" />
     <Compile Include="Models\ProjectRequestsMD.cs" />
     <Compile Include="Models\ProjectsJoinRequests.cs" />
     <Compile Include="Models\ProjectTrainees.cs" />
@@ -360,6 +371,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904171158255_dbv1.resx">
       <DependentUpon>201904171158255_dbv1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904211222168_projectEdit.resx">
+      <DependentUpon>201904211222168_projectEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904211226214_projectEdit2.resx">
+      <DependentUpon>201904211226214_projectEdit2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904211228181_projectEdit3.resx">
+      <DependentUpon>201904211228181_projectEdit3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

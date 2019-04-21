@@ -3,108 +3,38 @@
     ViewBag.Title = "PreviousProjects";
     Layout = "~/Views/AdminsDash/_LayoutA.cshtml";
 }
+@model IEnumerable<Sawa2ly.Models.Project>
 
 <div class="container">
     <h5 class="h1" style="text-align: center;color: #007b5e;margin-bottom: 50px;text-transform: uppercase;">Previous Projects</h5>
 
-    <div class="row carousel-row">
-        <div class="col-xs-8 col-xs-offset-2 slide-row">
-            <div id="carousel-3" class="carousel slide slide-carousel" data-ride="carousel">
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <div>
-                        <img width="140px" height="140px" src="~/Sources/images.jpg" alt="Image">
+    @foreach (var project in Model)
+    {
+
+        <div class="row carousel-row">
+            <div class="col-xs-8 col-xs-offset-2 slide-row">
+                <div id="carousel-3" class="carousel slide slide-carousel" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div>
+                            <img width="140px" height="140px" src="~/Sources/images.jpg" alt="Image">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="slide-content">
-                <h4>Example product</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                </p>
-            </div>
-            <div class="slide-footer">
-                <span class="pull-right buttons">
-                    <button class="btn btn-sm btn-default"><i class="fa fa-fw fa-eye"></i> Show</button>
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <div class="row carousel-row">
-        <div class="col-xs-8 col-xs-offset-2 slide-row">
-            <div id="carousel-3" class="carousel slide slide-carousel" data-ride="carousel">
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <div>
-                        <img width="140px" height="140px" src="~/Sources/images.jpg" alt="Image">
-                    </div>
+                <div class="slide-content">
+                    <h4>@project.Name</h4>
+                    <p>
+                        @project.Description
+                    </p>
+                </div>
+                <div class="slide-footer">
+                    <span class="pull-right buttons">
+                        <button class="btn btn-sm btn-default"><i class="fa fa-fw fa-eye"></i> Show</button>
+                    </span>
                 </div>
             </div>
-            <div class="slide-content">
-                <h4>Example product</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                </p>
-            </div>
-            <div class="slide-footer">
-                <span class="pull-right buttons">
-                    <button class="btn btn-sm btn-default"><i class="fa fa-fw fa-eye"></i> Show</button>
-                </span>
-            </div>
         </div>
-    </div>
 
-    <div class="row carousel-row">
-        <div class="col-xs-8 col-xs-offset-2 slide-row">
-            <div id="carousel-3" class="carousel slide slide-carousel" data-ride="carousel">
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <div>
-                        <img width="140px" height="140px" src="~/Sources/images.jpg" alt="Image">
-                    </div>
-                </div>
-            </div>
-            <div class="slide-content">
-                <h4>Example product</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                </p>
-            </div>
-            <div class="slide-footer">
-                <span class="pull-right buttons">
-                    <button class="btn btn-sm btn-default"><i class="fa fa-fw fa-eye"></i> Show</button>
-                </span>
-            </div>
-        </div>
-    </div>
-
+    }
 
 </div>

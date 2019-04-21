@@ -41,7 +41,6 @@ namespace Sawa2ly.Models
             return new ApplicationDbContext();
         }
         public System.Data.Entity.DbSet<Sawa2ly.Models.Project> Project { get; set; }
-        public System.Data.Entity.DbSet<Sawa2ly.Models.ProjectModule> ProjectModule { get; set; }
         public System.Data.Entity.DbSet<Sawa2ly.Models.ProjectTrainees> ProjectTrainees { get; set; }
         public System.Data.Entity.DbSet<Sawa2ly.Models.ProjectRequestsMD> ProjectRequestsMD { get; set; }
         public System.Data.Entity.DbSet<Sawa2ly.Models.ProjectsJoinRequests> ProjectsJoinRequests { get; set; }

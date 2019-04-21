@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sawa2ly.Models
 {
@@ -27,9 +28,19 @@ namespace Sawa2ly.Models
 
         public String MDID { get; set; }
 
-        public ProjectModule ProjectModule { get; set; }
+        public ApplicationUser MTL { get; set; }
 
-        public int? ProjectModuleId { get; set; }
+        public String MTLID { get; set; }
+
+        [Column(TypeName = "Date")]
+        public DateTime? StartDate { get; set; }
+
+        [Column(TypeName = "Date")]
+        public DateTime? EndDate { get; set; }
+
+        public int? Status { get; set; } // 1 -> Done   0 -> OnProgress
+
+        public Double? Price { get; set; }
 
     }
 }
