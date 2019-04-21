@@ -29,7 +29,9 @@
                 </div>
                 <div class="slide-footer">
                     <span class="pull-right buttons">
-                        <button class="btn btn-sm btn-default"><i class="fa fa-fw fa-eye"></i> Show</button>
+                        <a href="@Url.Action("Index", "Project", new { id=@projectTrainees.Project.Id })">
+                            <button class="btn btn-sm btn-default"><i class="fa fa-fw fa-eye"></i> Show</button>
+                        </a>
                     </span>
                 </div>
             </div>
