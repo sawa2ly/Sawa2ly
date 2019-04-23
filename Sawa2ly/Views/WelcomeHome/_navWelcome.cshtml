@@ -1,5 +1,13 @@
 ﻿@using Sawa2ly.Models
 @model LoginViewModel
+
+<script>
+    window.onload = function () {
+        //window.open('');
+        document.getElementById("linkid").click();
+    };
+</script>
+
 <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
         <div class="sidebar-menu">
@@ -8,7 +16,7 @@
                     <span>General</span>
                 </li>
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#popUpWindow">
+                    <a id="linkid" href="#" data-toggle="modal" data-target="#popUpWindow">
                         <i class="fa fa-sign-in-alt"></i>
                         <span>Login</span>
                     </a>
@@ -55,7 +63,7 @@
     <div class="row">
         <div>
             <section id="loginForm">
-                <div class="modal-dialog">
+                <div class="modal-dialog" style="left:80%;">
                     <div class="modal-content">
                         <!-- header -->
                         <div class="modal-header">
@@ -67,7 +75,7 @@
                         <div id="LoginForm">
                             <div class="container-fluid">
                                 <div class="login-form">
-                                    <div class="">
+                                    <div>
                                         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
                                         {
                                             @Html.AntiForgeryToken()

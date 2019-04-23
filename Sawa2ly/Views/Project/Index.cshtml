@@ -1,8 +1,9 @@
 ﻿
 @{
     Layout = null;
+    var status = (Model.Project.Status == 1) ? "Delivered" : "On Progress";
 }
-@model Sawa2ly.Models.Project
+@model Sawa2ly.ViewModels.ProjectAndTrainees
 
 <!DOCTYPE html>
 
@@ -25,7 +26,7 @@
             margin-bottom: 3%;
             border-radius: 0.5rem;
             background: #fff;
-            height: 555px;
+            height: 540px;
             overflow: scroll;
         }
         .profile-img{
@@ -204,13 +205,13 @@
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>
-                        @Model.Name
+                        @Model.Project.Name
                     </h5>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" id="l1">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                         </li>
-                        @if (true)
+                        @if ( ViewBag.accessibility == "member" && @Model.Project.MDID != null)
                         {
                             <li class="nav-item" id="l2">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#project" role="tab" aria-controls="profile" aria-selected="false">Project</a>
@@ -236,27 +237,41 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <p>Owner Info</p>
-                    <a>@String.Concat(Model.Customer.FName, " ",Model.Customer.LName)</a><br />
-                    <a>@Model.Customer.Email</a><br />
-                    <a>@Model.Customer.PhoneNumber</a>
+                    <a>@String.Concat(Model.Project.Customer.FName, " ",Model.Project.Customer.LName)</a><br />
+                    <a>@Model.Project.Customer.Email</a><br />
+                    <a>@Model.Project.Customer.PhoneNumber</a>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel">
                         <div class="row">
-                            <p>@Model.Description</p>
+                            <p>@Model.Project.Description</p>
                         </div>
                     </div>
-                    @if (true)
+                    @if (ViewBag.accessibility == "member" && @Model.Project.MDID != null)
                     {
                         <div class="tab-pane fade" id="project" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    
+                                </div>
+                                <div class="col-md-3">
+                                    @if (User.Identity.GetUserID()== @Model.Project.MDID)
+                                    {
+                                        <a href="@Url.Action("EditModule", "Project", new { id= @Model.Project.Id })">
+                                            <input type="submit" class="profile-edit-btn" value="Edit Module" style="margin-bottom:20px"/>
+                                        </a>
+                                    }
+
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Start Date</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>15-5-1997</p>
+                                    <p>@Model.Project.StartDate</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -264,7 +279,7 @@
                                     <label>End Date</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>17-7-1997</p>
+                                    <p>@Model.Project.EndDate</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -272,7 +287,7 @@
                                     <label>Status</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>on progress, Delivered</p>
+                                    <p>@status</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -280,17 +295,25 @@
                                     <label>Price</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>150 $</p>
+                                    <p>@String.Concat(Model.Project.Price , " $")</p>
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="team" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Marketing Director</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Adel Reda</p>
+                                    @if (Model.Project.MDID != null)
+                                    {
+                                        <p>@String.Concat(@Model.Project.MD.FName, " ", @Model.Project.MD.LName)</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Not Set</p>
+                                    }
                                 </div>
                             </div>
                             <div class="row">
@@ -298,34 +321,33 @@
                                     <label>Team Leader</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Ahmed</p>
+                                    @if (Model.Project.MTLID != null)
+                                    {
+                                        <p>@String.Concat(Model.Project.MTL.FName, " ", Model.Project.MTL.LName)</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Not Set</p>
+                                    }
+
+
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Team Trainee</label>
+
+                            @foreach (var trainee in Model.ProjectTrainees)
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Team Trainee</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@String.Concat(@trainee.MTS.FName, " ", @trainee.MTS.LName)</p>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <p>Mohamed</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Team Trainee</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Mohamed</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Team Trainee</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Mohamed</p>
-                                </div>
-                            </div>
+                            }
+
                         </div>
+
                         <div class="tab-pane fade" id="posts" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="container-fluid gedf-wrapper">
                                 <div class="row">
@@ -434,6 +456,7 @@
 
 
                         </div>
+
                     }
 
 
