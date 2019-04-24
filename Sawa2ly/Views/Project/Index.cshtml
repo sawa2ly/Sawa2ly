@@ -240,6 +240,29 @@
                     <a>@String.Concat(Model.Project.Customer.FName, " ",Model.Project.Customer.LName)</a><br />
                     <a>@Model.Project.Customer.Email</a><br />
                     <a>@Model.Project.Customer.PhoneNumber</a>
+                    @if (User.Identity.GetUserRule() == "2" && @Model.Project.MDID == null)
+                    {
+                        if (ViewBag.requested == "false")
+                        {
+                            <form action="@Url.Action("AddRequest", "Project")" method="post">
+                                <input name="proId" type="hidden" value="@Model.Project.Id" />
+                                <input name="customerId" type="hidden" value="@Model.Project.CustomerId" />
+                                <input type="submit" class="btn btn-success" value="Request To This Project" style="margin-top:20px;display:block" />
+                            </form>
+                        }
+                        else
+                        {
+                            <form action="@Url.Action("DeleteRequest", "Project")" method="post">
+                                <input name="proId" type="hidden" value="@Model.Project.Id" />
+                                <input name="reqId" type="hidden" value="@ViewBag.requestid" />
+                                <input type="submit" class="btn btn-danger" value="Delete Request" style="margin-top:20px;display:block" />
+                            </form>
+                        }
+
+
+                    }
+
+
                 </div>
             </div>
             <div class="col-md-8">
@@ -308,7 +331,9 @@
                                 <div class="col-md-6">
                                     @if (Model.Project.MDID != null)
                                     {
-                                        <p>@String.Concat(@Model.Project.MD.FName, " ", @Model.Project.MD.LName)</p>
+                                        <a href="@Url.Action("", "Project", new { id= @Model.Project.Id })" style="color:black">
+                                            @String.Concat(@Model.Project.MD.FName, " ", @Model.Project.MD.LName)
+                                        </a>
                                     }
                                     else
                                     {
@@ -323,11 +348,23 @@
                                 <div class="col-md-6">
                                     @if (Model.Project.MTLID != null)
                                     {
-                                        <p>@String.Concat(Model.Project.MTL.FName, " ", Model.Project.MTL.LName)</p>
+                                        <a href="@Url.Action("", "Project", new { id= @Model.Project.Id })" style="color:black">
+                                            @String.Concat(Model.Project.MTL.FName, " ", Model.Project.MTL.LName)
+                                        </a>
+                                        
                                     }
                                     else
                                     {
-                                        <p>Not Set</p>
+                                        if (User.Identity.GetUserID() == @Model.Project.MDID)
+                                        {
+                                            <a href="@Url.Action("AddMTL", "Project", new { id= @Model.Project.Id })" style="color:green">
+                                                Add Leader
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <p>Not Set</p>
+                                        }
                                     }
 
 
@@ -341,7 +378,23 @@
                                         <label>Team Trainee</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>@String.Concat(@trainee.MTS.FName, " ", @trainee.MTS.LName)</p>
+                                        <a href="@Url.Action("", "Project", new { id= @Model.Project.Id })" style="color:black">
+                                            @String.Concat(@trainee.MTS.FName, " ", @trainee.MTS.LName)
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (User.Identity.GetUserID() == @Model.Project.MDID || User.Identity.GetUserID() == @Model.Project.MTLID)
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Team Trainee</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a href="@Url.Action("AddMTS", "Project", new { id= @Model.Project.Id })" style="color:green">
+                                            Add Trainee
+                                        </a>
                                     </div>
                                 </div>
                             }

@@ -1,0 +1,167 @@
+﻿@model Sawa2ly.ViewModels.UsersAndRequest
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Marketing Team Trainees</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" id="bootstrap-css">
+    <script src="~/Content/bootstrap.min.css"></script>
+    <script src="~/Sources/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/Sources/fontawesome-free-5.8.1-web/css/all.css" crossorigin="anonymous">
+    <style>
+        body {
+            background: -webkit-linear-gradient(left, #d4efc9, #638e90);
+        }
+        .profile-edit-btn{
+            border: none;
+            border-radius: 1.5rem;
+            width: 70%;
+            padding: 2%;
+            font-weight: 600;
+            background:-webkit-linear-gradient(left, #d4efc9, #638e90);
+            cursor: pointer;
+        }
+        .emp-profile {
+            font-family: Roboto,sans-serif;
+            background: #fff;
+            padding: 3%;
+            margin-top: 3%;
+            margin-bottom: 3%;
+            border-radius: 0.5rem;
+            height: 540px;
+            overflow: scroll;
+        }
+
+        .panel {
+            margin: 5%;
+            background: transparent;
+        }
+
+
+        tr {
+            transition: all 0.5s;
+        }
+
+            tr:hover {
+                background-color: #cfeac6;
+                transition: 0.5s;
+            }
+
+        .btn-warning {
+            transition: all 0.8s;
+        }
+
+            .btn-warning:hover, .btn-warning:focus {
+                transition: 0.8s;
+                background-color: #428bca;
+                border-color: #428bca;
+            }
+
+        .panel-footer {
+            background-color: #5bc0de;
+            color: white;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container emp-profile">
+        <div class="row">
+            <label class="col-md-10 text-md-center" style="color: #000;font-family: 'Pacifico', cursive;font-size: 3em;margin-bottom: 1em;">Team Trainees</label>
+            <div class="col-md-2">
+                <a href="@Url.Action("Index", "Project", new { id= @ViewBag.accessibility })">
+                    <input type="submit" class="profile-edit-btn" value="Back" />
+                </a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                    <input type="text" id="Search" placeholder="Search" class="form-control" style="width:200px" />
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Request To Join The Team</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var mtl in Model.Users)
+                {
+                    <tr class="Search">
+                        <td style="vertical-align: middle;">@String.Concat(mtl.FName, " ", mtl.LName)</td>
+                        <td style="vertical-align: middle;">@mtl.Email</td>
+                        <td>
+                            @if (!Model.Requests.Any(i=>i.RecieverId == mtl.Id))
+                            {
+                                <form action="@Url.Action("MTSRequest", "Project")" method="post">
+                                    <input name="proId" type="hidden" value="@ViewBag.accessibility" />
+                                    <input name="recieverId" type="hidden" value="@mtl.Id" />
+                                    <input type="submit" class="btn btn-success" value="Request To This Project" />
+                                </form>
+                            }
+                            else
+                            {
+                                <form action="@Url.Action("MTSDeleteRequest", "Project")" method="post">
+                                    <input name="reqId" type="hidden" value="@Model.Requests.Single(i=>i.RecieverId == mtl.Id).Id" />
+                                    <input name="proId" type="hidden" value="@ViewBag.accessibility" />
+                                    <input name="recieverId" type="hidden" value="@mtl.Id" />
+                                    <input type="submit" class="btn btn-danger" value="Delete Request" />
+                                </form>
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <script>
+        $(document).ready(function () {
+            function Contains(text_one, text_two) {
+                if(text_one.indexOf(text_two)!= -1)
+                    return true
+            }
+            $("#Search").keyup(function () {
+                var searchText = $("#Search").val().toLowerCase();
+                $(".Search").each(function () {
+                    if (!Contains($(this).text().toLowerCase(), searchText)) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                })
+            })
+        });
+        </script>
+
+    </div>
+</body>
+</html>

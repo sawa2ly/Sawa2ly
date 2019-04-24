@@ -18,5 +18,10 @@ namespace Sawa2ly.Models
         public ApplicationUser MD { get; set; }
 
         public String MDID { get; set; }
+
+        public ApplicationUser Customer { get; set; }
+
+        public String CustomerId { get; set; }
+
     }
 }
