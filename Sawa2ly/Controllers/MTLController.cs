@@ -65,13 +65,37 @@ namespace Sawa2ly.Controllers
         {
             if (User.Identity.GetUserRule() == "3")
             {
-                return View();
+                var userId = User.Identity.GetUserID();
+                var requests = db.ProjectsJoinRequests.Where(c => c.RecieverId == userId).Include(p => p.Project).Include(m => m.Sender).ToList();
+                return View(requests);
             }
             else
             {
                 return RedirectToAction("RedirectToProfile", "Home");
             }
 
+        }
+
+        [HttpPost]
+        public ActionResult AcceptRequest(int reqId, String MTLId, int proId)
+        {
+            var project = db.Project.First(a => a.Id == proId);
+            project.MTLID = MTLId;
+            db.SaveChanges();
+            var PR = db.ProjectsJoinRequests.Single(a => a.Id == reqId);
+            db.ProjectsJoinRequests.Remove(PR);
+            db.SaveChanges();
+            return RedirectToAction("Requests");
+
+        }
+
+        [HttpPost]
+        public ActionResult DeleteRequest(int reqId)
+        {
+            var PR = db.ProjectsJoinRequests.Single(a => a.Id == reqId);
+            db.ProjectsJoinRequests.Remove(PR);
+            db.SaveChanges();
+            return RedirectToAction("Requests");
         }
 
 

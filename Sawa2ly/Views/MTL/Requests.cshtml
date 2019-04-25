@@ -3,6 +3,59 @@
     ViewBag.Title = "Requests";
     Layout = "~/Views/AdminsDash/_LayoutA.cshtml";
 }
+@model IEnumerable<Sawa2ly.Models.ProjectsJoinRequests>
+<style>
+    .profile-img img {
+        width: auto;
+        height: 100px;
+    }
 
-<h2>Requests</h2>
+    .info {
+        display: inline-block;
+        margin-right: 10px;
+        color: #777;
+    }
+
+        .info span {
+            font-weight: bold;
+        }
+</style>
+
+<div class="container">
+    <h1 style="margin-bottom: 30px;">Requests</h1>
+    @foreach (var req in Model)
+    {
+        <div class="row">
+            <div class="list-group container-fluid">
+                <div class="list-group-item clearfix">
+                    <div class="profile-teaser-left col-lg-3">
+                        <div class="profile-img"><img src="@Url.Content(req.Sender.UserImageUrl)" /></div>
+                    </div>
+                    <div class="profile-teaser-main col-lg-9">
+                        <div class="row">
+                            <h2 class="col-lg-5">@String.Concat(req.Sender.FName, " ", req.Sender.LName)</h2>
+                            <div class="row col-lg-4" style="padding-top:15px">
+                                <form action="@Url.Action("AcceptRequest", "MTL")" method="post" style="margin-right:10px">
+                                    <input name="reqId" type="hidden" value="@req.Id" />
+                                    <input name="proId" type="hidden" value="@req.ProjectId" />
+                                    <input name="MTLId" type="hidden" value="@req.RecieverId" />
+                                    <input type="submit" class="btn btn-success" value="Accept" style="margin-top:0" />
+                                </form>
+                                <form action="@Url.Action("DeleteRequest", "MTL")" method="post">
+                                    <input name="reqId" type="hidden" value="@req.Id" />
+                                    <input type="submit" class="btn btn-danger" value="Decline" style="margin-top:0" />
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row col-lg-8" style="margin-top:10px;">
+                            <div class="info"><span class="">Info:</span> Marketing Director</div>
+                            <div class="info"><span class="">Project:</span>@req.Project.Name</div>
+                        </div>
+                    </div>
+                </div><!-- item -->
+            </div>
+        </div>
+    }
+
+</div>
 

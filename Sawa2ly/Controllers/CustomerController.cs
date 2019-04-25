@@ -76,7 +76,9 @@ namespace Sawa2ly.Controllers
         {
             if (User.Identity.GetUserRule() == "1")
             {
-                return View();
+                var userId = User.Identity.GetUserID();
+                var requests = db.ProjectRequestsMD.Where(c=>c.CustomerId == userId).Include(p=>p.Project).Include(m=>m.MD).ToList();
+                return View(requests);
             }
             else
             {
@@ -84,5 +86,32 @@ namespace Sawa2ly.Controllers
             }
 
         }
+
+        [HttpPost]
+        public ActionResult AcceptRequest (int reqId, String MDId , int proId)
+        {
+            var project = db.Project.First(a => a.Id == proId);
+            project.MDID = MDId;
+            db.SaveChanges();
+            var PR = db.ProjectRequestsMD.Single(a => a.Id == reqId);
+            db.ProjectRequestsMD.Remove(PR);
+            db.SaveChanges();
+            return RedirectToAction("Requests");
+
+        }
+
+        [HttpPost]
+        public ActionResult DeleteRequest(int reqId)
+        {
+            var PR = db.ProjectRequestsMD.Single(a => a.Id == reqId);
+            db.ProjectRequestsMD.Remove(PR);
+            db.SaveChanges();
+            return RedirectToAction("Requests");
+        }
+
+
+
+
+
     }
 }
