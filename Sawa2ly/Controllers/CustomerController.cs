@@ -109,7 +109,18 @@ namespace Sawa2ly.Controllers
             return RedirectToAction("Requests");
         }
 
+        public ActionResult EditProfile()
+        {
+            if (User.Identity.GetUserRule() == "1")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("RedirectToProfile", "Home");
+            }
 
+        }
 
 
 

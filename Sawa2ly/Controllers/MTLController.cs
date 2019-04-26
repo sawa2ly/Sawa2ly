@@ -76,6 +76,19 @@ namespace Sawa2ly.Controllers
 
         }
 
+        public ActionResult EditProfile()
+        {
+            if (User.Identity.GetUserRule() == "3")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("RedirectToProfile", "Home");
+            }
+
+        }
+
         [HttpPost]
         public ActionResult AcceptRequest(int reqId, String MTLId, int proId)
         {

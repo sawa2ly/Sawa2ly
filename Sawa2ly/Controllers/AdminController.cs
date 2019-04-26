@@ -23,5 +23,44 @@ namespace Sawa2ly.Controllers
             
         }
 
+        public ActionResult ListProjects()
+        {
+            if (User.Identity.GetUserRule() == "5")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("RedirectToProfile", "Home");
+            }
+
+        }
+
+        public ActionResult ListUsers()
+        {
+            if (User.Identity.GetUserRule() == "5")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("RedirectToProfile", "Home");
+            }
+
+        }
+
+        public ActionResult EditProfile()
+        {
+            if (User.Identity.GetUserRule() == "5")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("RedirectToProfile", "Home");
+            }
+
+        }
+
     }
 }

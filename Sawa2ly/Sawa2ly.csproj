@@ -355,6 +355,13 @@
     <Content Include="Views\Project\EditModule.cshtml" />
     <Content Include="Views\Project\AddMTL.cshtml" />
     <Content Include="Views\Project\AddMTS.cshtml" />
+    <Content Include="Views\MTS\EditProfile.cshtml" />
+    <Content Include="Views\Customer\EditProfile.cshtml" />
+    <Content Include="Views\MD\EditProfile.cshtml" />
+    <Content Include="Views\Admin\EditProfile.cshtml" />
+    <Content Include="Views\MTL\EditProfile.cshtml" />
+    <Content Include="Views\Admin\ListProjects.cshtml" />
+    <Content Include="Views\Admin\ListUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
