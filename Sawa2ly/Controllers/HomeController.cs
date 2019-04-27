@@ -3,15 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Sawa2ly.Extensions;
+using Sawa2ly.Models;
 
 namespace Sawa2ly.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private ApplicationDbContext _context;
+
+        public HomeController()
         {
-            return View();
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+       
+    //public ViewResult Index()
+        //{
+        //    var projects = _context.Project.ToList();
+        //    return View(projects);
+        //}
+
+        [HttpPost]
+        public ActionResult Save(string ProjectName, string ProjectDesc)
+        {
+            
+            var customerid = User.Identity.GetUserID();
+            
+          
+            _context.Project.Add(new Project {Name = ProjectName, Description = ProjectDesc, CustomerId = customerid});
+        
+
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult About()
@@ -63,5 +93,6 @@ namespace Sawa2ly.Controllers
             }
 
         }
+        
     }
 }

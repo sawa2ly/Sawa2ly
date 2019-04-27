@@ -1,13 +1,14 @@
-﻿<div class="jumbotron">
-    <h2>Create Project</h2>
-    <h3>Enter Your Product Details.</h3>
-    <form>
+﻿
+<div class="jumbotron">
+        <h2>Create Project</h2>
+        <h3>Enter Your Product Details.</h3>
+    <form action="@Url.Action("Save", "Home")" method="post"> 
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Product Name">
-        </div>
-        <div class="form-group">
-            <textarea type="text" class="form-control" placeholder="Describe your Product"></textarea>
-        </div>
-        <button type="submit" class="btn btn-lg btn-primary" style="background: #ff9900;border-color: #f0ad4e;">Create</button>
-    </form>
-</div>
+                <input  name="ProjectName" type="text" class="form-control" placeholder="Product Name">
+            </div>
+            <div class="form-group">
+                <textarea name="ProjectDesc" type="text" class="form-control" placeholder="Describe your Product"></textarea>
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary" style="background: #ff9900;border-color: #f0ad4e;">Create</button>
+        </form>
+    </div>

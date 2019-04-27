@@ -15,6 +15,12 @@ namespace Sawa2ly.Extensions
             // Test for null to avoid issues during local testing
             return (claim != null) ? claim.Value : string.Empty;
         }
+        public static string GetUserID(this IIdentity identity)
+        {
+            var claim = ((ClaimsIdentity)identity).FindFirst("Id");
+            // Test for null to avoid issues during local testing
+            return (claim != null) ? claim.Value : string.Empty;
+        }
         public static string GetUserFName(this IIdentity identity)
         {
             var claim = ((ClaimsIdentity)identity).FindFirst("FName");
