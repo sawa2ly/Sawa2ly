@@ -20,7 +20,7 @@
     <link href="~/Sources/gijgo-combined-1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <style>
         body {
-            background: -webkit-linear-gradient(left, #d4efc9, #638e90);
+            background: #555555;
         }
         .emp-profile {
             font-family:Roboto,sans-serif;
@@ -31,6 +31,7 @@
             border-radius: 0.5rem;
             height: 540px;
             overflow: scroll;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
         }
         ::-webkit-scrollbar {
             width: 10px;
@@ -46,6 +47,13 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
+        .bu{
+            margin-bottom:20px;background-color: #555555;color: white;border: 2px solid #555555;
+        }
+        .bu:hover{
+              background-color: white;color: #555555;
+        }
+
     </style>
 </head>
 <body>
@@ -107,7 +115,7 @@
             
             <div class="form-group row" style="margin-top:40px">
                 <div class="col-md-5"></div>
-                <button type="submit" class="btn btn-lg btn-primary" style="background: #87ada2;border-color:#659091;">Edit</button>
+                <button type="submit" class="btn btn-default bu">Edit</button>
             </div>
         </form>
     </div>

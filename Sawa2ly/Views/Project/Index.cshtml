@@ -18,7 +18,10 @@
     <link rel="stylesheet" href="~/Sources/fontawesome-free-5.8.1-web/css/all.css" crossorigin="anonymous">
     <style>
         body{
-            background: -webkit-linear-gradient(left, #d4efc9, #638e90);
+            background: #555555;
+        }
+        a{
+            color:#555555;
         }
         .emp-profile{
             padding: 3%;
@@ -28,6 +31,7 @@
             background: #fff;
             height: 540px;
             overflow: scroll;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
         }
         .profile-img{
             text-align: center;
@@ -60,15 +64,6 @@
         }
         .profile-head h6{
             color: #0062cc;
-        }
-        .profile-edit-btn{
-            border: none;
-            border-radius: 1.5rem;
-            width: 70%;
-            padding: 2%;
-            font-weight: 600;
-            background:-webkit-linear-gradient(left, #d4efc9, #638e90);
-            cursor: pointer;
         }
         .proile-rating{
             font-size: 12px;
@@ -138,6 +133,14 @@
         ::-webkit-scrollbar-thumb:hover {
           background: #555; 
         }
+
+        .bu{
+            margin-bottom:20px;background-color: #555555;color: white;border: 2px solid #555555;
+        }
+        .bu:hover{
+              background-color: white;color: #555555;
+        }
+
     </style>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -229,7 +232,7 @@
             </div>
             <div class="col-md-2">
                 <a href="@Url.Action("RedirectToProfile", "Home")">
-                    <input type="submit" class="profile-edit-btn" value="Back" />
+                    <input type="submit" class="btn btn-default bu" value="Back" />
                 </a>
             </div>
         </div>
@@ -283,7 +286,7 @@
                                     @if (User.Identity.GetUserID()== @Model.Project.MDID)
                                     {
                                         <a href="@Url.Action("EditModule", "Project", new { id= @Model.Project.Id })">
-                                            <input type="submit" class="profile-edit-btn" value="Edit Module" style="margin-bottom:20px"/>
+                                            <input type="submit" class="btn btn-default bu" value="Edit Module" />
                                         </a>
                                     }
 
