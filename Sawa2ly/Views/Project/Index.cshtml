@@ -1,0 +1,522 @@
+﻿
+@{
+    Layout = null;
+    var status = (Model.Project.Status == 1) ? "Delivered" : "On Progress";
+}
+@model Sawa2ly.ViewModels.ProjectAndTrainees
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Project</title>
+    <link href="~/Sources/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="~/Sources/css/bootstrap.min.js"></script>
+    <script src="~/Sources/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/Sources/fontawesome-free-5.8.1-web/css/all.css" crossorigin="anonymous">
+    <style>
+        body{
+            background: -webkit-linear-gradient(left, #d4efc9, #638e90);
+        }
+        .emp-profile{
+            padding: 3%;
+            margin-top: 3%;
+            margin-bottom: 3%;
+            border-radius: 0.5rem;
+            background: #fff;
+            height: 540px;
+            overflow: scroll;
+        }
+        .profile-img{
+            text-align: center;
+        }
+        .profile-img img{
+            width: 70%;
+            height: 100%;
+        }
+        .profile-img .file {
+            position: relative;
+            overflow: hidden;
+            margin-top: -20%;
+            width: 70%;
+            border: none;
+            border-radius: 0;
+            font-size: 15px;
+            background: #212529b8;
+        }
+        .profile-img .file input {
+            position: absolute;
+            opacity: 0;
+            right: 0;
+            top: 0;
+        }
+        .profile-head h5{
+            color: #333;
+            margin-bottom:80px;
+            font-size: 28px;
+            text-transform: uppercase;
+        }
+        .profile-head h6{
+            color: #0062cc;
+        }
+        .profile-edit-btn{
+            border: none;
+            border-radius: 1.5rem;
+            width: 70%;
+            padding: 2%;
+            font-weight: 600;
+            background:-webkit-linear-gradient(left, #d4efc9, #638e90);
+            cursor: pointer;
+        }
+        .proile-rating{
+            font-size: 12px;
+            color: #818182;
+            margin-top: 5%;
+        }
+        .proile-rating span{
+            color: #495057;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .profile-head .nav-tabs{
+            margin-bottom:5%;
+        }
+        .profile-head .nav-tabs .nav-link{
+            font-weight:600;
+            border: none;
+        }
+        .profile-head .nav-tabs .nav-link.active{
+            border: none;
+            border-bottom:2px solid #0062cc;
+        }
+        .profile-work{
+            padding: 14%;
+            margin-top: -15%;
+        }
+        .profile-work p{
+            font-size: 12px;
+            color: #818182;
+            font-weight: 600;
+            margin-top: 10%;
+        }
+        .profile-work a{
+            text-decoration: none;
+            color: #495057;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .profile-work ul{
+            list-style: none;
+        }
+        .profile-tab label{
+            font-weight: 600;
+        }
+        .profile-tab p{
+    
+            color: #000;
+        }
+        /* width */
+        ::-webkit-scrollbar {
+          width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+          background: #f1f1f1; 
+          border-radius: 10px;
+        }
+ 
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+          background: #888;
+          border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+          background: #555; 
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            First();
+            function First() {
+                $('#home').addClass('active')
+                $('#project').hide();
+                $('#team').hide();
+                $('#posts').hide();
+            }
+            function DisableTabs() {
+                $('#project').hide();
+                $('#team').hide();
+                $('#posts').hide();
+                $('#home').hide();
+                $('#home-tab').removeClass('active');
+                $('#profile-tab').removeClass('active');
+                $('#team-tab').removeClass('active');
+                $('#posts-tab').removeClass('active');
+            }
+            $('.nav-tabs li a[href="#home"]').on('click', function (event) {
+                DisableTabs();
+                var tabid = $(this).attr('href');
+                $('#home-tab').addClass('active');
+                $('#home-tab').siblings().removeClass('active');
+                var tabpanel = $(''+ tabid).show();
+                $(tabpanel).addClass('tab-pane fade show active');
+            });
+            $('.nav-tabs li a[href="#project"]').on('click', function (event) {
+                DisableTabs();
+                var tabid = $(this).attr('href');
+                $('#profile-tab').addClass('nav-link active');
+                $('#profile-tab').siblings().removeClass('nav-link active');
+                var tabpanel = $(''+ tabid).show();
+                $(tabpanel).addClass('tab-pane fade show active');
+            });
+            $('.nav-tabs li a[href="#team"]').on('click', function (event) {
+                DisableTabs();
+                var tabid = $(this).attr('href');
+                $('#team-tab').addClass('active');
+                $('#team-tab').siblings().removeClass('active');
+                var tabpanel = $(''+ tabid).show();
+                $(tabpanel).addClass('tab-pane fade show active');
+            });
+            $('.nav-tabs li a[href="#posts"]').on('click', function (event) {
+                DisableTabs();
+                var tabid = $(this).attr('href');
+                $('#posts-tab').addClass('active');
+                $('#posts-tab').siblings().removeClass('active');
+                var tabpanel = $(''+ tabid).show();
+                $(tabpanel).addClass('tab-pane fade show active');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container emp-profile" style="padding: 30px;">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="~/Sources/images.jpg" alt="" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        @Model.Project.Name
+                    </h5>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" id="l1">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        @if ( ViewBag.accessibility == "member" && @Model.Project.MDID != null)
+                        {
+                            <li class="nav-item" id="l2">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#project" role="tab" aria-controls="profile" aria-selected="false">Project</a>
+                            </li>
+                            <li class="nav-item" id="l3">
+                                <a class="nav-link" id="team-tab" data-toggle="tab" href="#team" role="tab" aria-controls="profile" aria-selected="false">Team</a>
+                            </li>
+                            <li class="nav-item" id="l4">
+                                <a class="nav-link" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="profile" aria-selected="false">Posts</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <a href="@Url.Action("RedirectToProfile", "Home")">
+                    <input type="submit" class="profile-edit-btn" value="Back" />
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>Owner Info</p>
+                    <a>@String.Concat(Model.Project.Customer.FName, " ",Model.Project.Customer.LName)</a><br />
+                    <a>@Model.Project.Customer.Email</a><br />
+                    <a>@Model.Project.Customer.PhoneNumber</a>
+                    @if (User.Identity.GetUserRule() == "2" && @Model.Project.MDID == null)
+                    {
+                        if (ViewBag.requested == "false")
+                        {
+                            <form action="@Url.Action("AddRequest", "Project")" method="post">
+                                <input name="proId" type="hidden" value="@Model.Project.Id" />
+                                <input name="customerId" type="hidden" value="@Model.Project.CustomerId" />
+                                <input type="submit" class="btn btn-success" value="Request To This Project" style="margin-top:20px;display:block" />
+                            </form>
+                        }
+                        else
+                        {
+                            <form action="@Url.Action("DeleteRequest", "Project")" method="post">
+                                <input name="proId" type="hidden" value="@Model.Project.Id" />
+                                <input name="reqId" type="hidden" value="@ViewBag.requestid" />
+                                <input type="submit" class="btn btn-danger" value="Delete Request" style="margin-top:20px;display:block" />
+                            </form>
+                        }
+
+
+                    }
+
+
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel">
+                        <div class="row">
+                            <p>@Model.Project.Description</p>
+                        </div>
+                    </div>
+                    @if (ViewBag.accessibility == "member" && @Model.Project.MDID != null)
+                    {
+                        <div class="tab-pane fade" id="project" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    
+                                </div>
+                                <div class="col-md-3">
+                                    @if (User.Identity.GetUserID()== @Model.Project.MDID)
+                                    {
+                                        <a href="@Url.Action("EditModule", "Project", new { id= @Model.Project.Id })">
+                                            <input type="submit" class="profile-edit-btn" value="Edit Module" style="margin-bottom:20px"/>
+                                        </a>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Start Date</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.Project.StartDate</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>End Date</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.Project.EndDate</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Status</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@status</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Price</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@String.Concat(Model.Project.Price , " $")</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="team" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Marketing Director</label>
+                                </div>
+                                <div class="col-md-6">
+                                    @if (Model.Project.MDID != null)
+                                    {
+                                        <a href="@Url.Action("", "Project", new { id= @Model.Project.Id })" style="color:black">
+                                            @String.Concat(@Model.Project.MD.FName, " ", @Model.Project.MD.LName)
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <p>Not Set</p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Team Leader</label>
+                                </div>
+                                <div class="col-md-6">
+                                    @if (Model.Project.MTLID != null)
+                                    {
+                                        <a href="@Url.Action("", "Project", new { id= @Model.Project.Id })" style="color:black">
+                                            @String.Concat(Model.Project.MTL.FName, " ", Model.Project.MTL.LName)
+                                        </a>
+                                        
+                                    }
+                                    else
+                                    {
+                                        if (User.Identity.GetUserID() == @Model.Project.MDID)
+                                        {
+                                            <a href="@Url.Action("AddMTL", "Project", new { id= @Model.Project.Id })" style="color:green">
+                                                Add Leader
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <p>Not Set</p>
+                                        }
+                                    }
+
+
+                                </div>
+                            </div>
+
+                            @foreach (var trainee in Model.ProjectTrainees)
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Team Trainee</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a href="@Url.Action("", "Project", new { id= @Model.Project.Id })" style="color:black">
+                                            @String.Concat(@trainee.MTS.FName, " ", @trainee.MTS.LName)
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (User.Identity.GetUserID() == @Model.Project.MDID || User.Identity.GetUserID() == @Model.Project.MTLID)
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Team Trainee</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a href="@Url.Action("AddMTS", "Project", new { id= @Model.Project.Id })" style="color:green">
+                                            Add Trainee
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                        <div class="tab-pane fade" id="posts" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="container-fluid gedf-wrapper">
+                                <div class="row">
+
+                                    <div class="col-md-10 gedf-main">
+
+                                        <div class="card gedf-card" style="margin-bottom:50px;">
+                                            <div class="card-header">
+                                                <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active">Make a Post</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="tab-content" id="myTabContent">
+                                                    <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                                        <div class="form-group">
+                                                            <label class="sr-only" for="message">post</label>
+                                                            <textarea class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="btn-toolbar justify-content-between">
+                                                    <div class="btn-group">
+                                                        <button type="submit" class="btn btn-primary">share</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card gedf-card" style="margin-bottom:30px;">
+                                            <div class="card-header">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="mr-2">
+                                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                                        </div>
+                                                        <div class="ml-2">
+                                                            <div class="h5 m-0">Adel Reda</div>
+                                                            <div class="h7 text-muted">Markting Director</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
+                                                <p class="card-text">
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
+                                                    sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="card gedf-card" style="margin-bottom:30px;">
+                                            <div class="card-header">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="mr-2">
+                                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                                        </div>
+                                                        <div class="ml-2">
+                                                            <div class="h5 m-0">Adel Reda</div>
+                                                            <div class="h7 text-muted">Markting Director</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
+                                                <p class="card-text">
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
+                                                    sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="card gedf-card" style="margin-bottom:30px;">
+                                            <div class="card-header">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="mr-2">
+                                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                                        </div>
+                                                        <div class="ml-2">
+                                                            <div class="h5 m-0">Adel Reda</div>
+                                                            <div class="h7 text-muted">Markting Director</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
+                                                <p class="card-text">
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
+                                                    sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    }
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

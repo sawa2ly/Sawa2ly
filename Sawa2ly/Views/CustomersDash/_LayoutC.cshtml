@@ -1,7 +1,9 @@
-﻿
+﻿@using Sawa2ly.Extensions
 @{
     Layout = null;
+    var rule = (User.Identity.GetUserRule() == "1")?"Customer":"Marketing Trainee";
 }
+
 
 <!DOCTYPE html>
 
@@ -20,8 +22,65 @@
 <body>
     @Html.Partial("~/Views/CustomersDash/_navC.cshtml")
     <div class="container">
-        @RenderBody()
+        <div class="row">
+            <div class="col-md-3">
+                <div class="profile-sidebar" style="background-color:#e6e6e6;height:100%;">
+                    <!-- SIDEBAR USERPIC -->
+                    <div class="profile-userpic">
+                        <img src="@Url.Content(User.Identity.GetUserImageUrl())" class="img-responsive" alt="">
+                    </div>
+                    <!-- END SIDEBAR USERPIC -->
+                    <!-- SIDEBAR USER TITLE -->
+                    <div class="profile-usertitle">
+                        <div class="profile-usertitle-name">
+                            @String.Concat(User.Identity.GetUserFName() , " ", User.Identity.GetUserLName())
+                        </div>
+                        <div class="profile-usertitle-job">
+                            @rule
+                        </div>
+                        <div class="profile-usertitle-job">
+                            @User.Identity.GetUserEmail()
+                        </div>
+                        <div class="profile-usertitle-job">
+                            @User.Identity.GetUserPhoneNumber()
+                        </div>
+                    </div>
+                    <!-- END SIDEBAR USER TITLE -->
+                </div>
+            </div>
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
+        </div>
+        
     </div>
     <hr />
+
+    <footer style="background-color:#f8f8f8;padding:40px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>About Website</h2>
+                    <p>
+                        Sawa2ly is a commerce management system that allows customers that have Products to be able to Market their products by communicating with Marketing Directors and Marketing Team Leaders to market their products in an easy and professional way.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h2>About Us</h2>
+                    <p>Sawa2ly is an organization that helps customers for advertizing their products in a proffesional way.</p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Contact Us</h2>
+                    You can make reports by contacting us<br />
+                    Cairo, Egypt<br />
+                    <abbr title="Phone">Phone :</abbr>
+                    19999
+                    <abbr title="Phone">Email :</abbr>
+                    sawa2ly@gmail.com
+                </div>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>

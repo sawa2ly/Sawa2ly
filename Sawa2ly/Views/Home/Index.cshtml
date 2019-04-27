@@ -3,6 +3,7 @@
     ViewBag.Title = "Home Page";
 }
 @using Sawa2ly.Extensions
+@model IEnumerable<Sawa2ly.Models.Project>
 
 
 @if (Request.IsAuthenticated)
@@ -11,10 +12,15 @@
     {
         @Html.Partial("_CreateProject")
     }
+<<<<<<< HEAD
+=======
+    <!-- Unassigned Projects -->
+>>>>>>> master
     <section id="team" class="pb-5">
         <div class="container">
             <h5 class="section-title h1">UnAssigned Projects</h5>
             <div class="row">
+<<<<<<< HEAD
                 @foreach (var project in Model)
                 {
                     <div class="col-xs-12 col-sm-6 col-md-4">
@@ -37,11 +43,39 @@
                                             <h4 class="card-title">Hello</h4>
                                             <p class="card-text">Yes</p>
                                         </div>
+=======
+
+                @foreach (var project in Model)
+                {
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                        <div class="mainflip">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p>
+                                            <img class="img-fluid" src="~/Sources/images.jpg" alt="card image">
+                                        </p>
+                                        <h4 class="card-title">@project.Name</h4>
+                                        <h6 class="card-text">@String.Concat(project.Customer.FName, " ", project.Customer.LName)</h6>
+                                        <h6 class="card-text">@project.Customer.Email</h6>
+                                        <h6 class="card-text">@project.Customer.PhoneNumber</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">@project.Name</h4>
+                                        <p class="card-text">@project.Description</p>
+>>>>>>> master
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
                 }
             </div>
         </div>
@@ -71,10 +105,14 @@ else
                             </div>
                         </div>
                     </a>
-
+=======
                 </div>
+>>>>>>> master
+
+                }
 
             </div>
         </div>
     </section>
+    <!-- Unassigned Projects -->
 }

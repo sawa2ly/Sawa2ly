@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -11,36 +12,26 @@ namespace Sawa2ly.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationDbContext _context;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
-        public HomeController()
+        public ActionResult Index()
         {
-            _context = new ApplicationDbContext();
-        }
+            if (!Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "WelcomeHome");
+            }
 
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
+            return View(db.Project.Where(I => I.MDID == null).Include(p => p.Customer).ToList());
+            
         }
-
-       
-    //public ViewResult Index()
-        //{
-        //    var projects = _context.Project.ToList();
-        //    return View(projects);
-        //}
 
         [HttpPost]
         public ActionResult Save(string ProjectName, string ProjectDesc)
         {
-            
-            var customerid = User.Identity.GetUserID();
-            
-          
-            _context.Project.Add(new Project {Name = ProjectName, Description = ProjectDesc, CustomerId = customerid});
-        
 
-            _context.SaveChanges();
+            var customerid = User.Identity.GetUserID();
+            db.Project.Add(new Project { Name = ProjectName, Description = ProjectDesc, CustomerId = customerid });
+            db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
 

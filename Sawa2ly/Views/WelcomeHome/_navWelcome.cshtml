@@ -1,0 +1,110 @@
+﻿@using Sawa2ly.Models
+@model LoginViewModel
+
+<script>
+    window.onload = function () {
+        //window.open('');
+        document.getElementById("linkid").click();
+    };
+</script>
+
+<nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+        <div class="sidebar-menu">
+            <ul>
+                <li class="header-menu">
+                    <span>General</span>
+                </li>
+                <li>
+                    <a id="linkid" href="#" data-toggle="modal" data-target="#popUpWindow">
+                        <i class="fa fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span>E-commerce</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-chart-line"></i>
+                        <span>Instructions</span>
+                    </a>
+                </li>
+                <li class="header-menu">
+                    <span>Extra</span>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-info-circle "></i>
+                        <span>About Website</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("About", "Home")">
+                        <i class="fa fa-question-circle "></i>
+                        <span>About Us</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Contact", "Home")">
+                        <i class="fa fa-phone"></i>
+                        <span>Contact Us</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="modal fade" id="popUpWindow">
+    <div class="row">
+        <div>
+            <section id="loginForm">
+                <div class="modal-dialog" style="left:80%;">
+                    <div class="modal-content">
+                        <!-- header -->
+                        <div class="modal-header">
+                            <h3 class="modal-title">Login</h3>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <!-- body -->
+
+                        <div id="LoginForm">
+                            <div class="container-fluid">
+                                <div class="login-form">
+                                    <div>
+                                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                            </div>
+                                            <button type="submit" class="btn btn-primary" style="margin-bottom:10px">Login</button>
+                                            <p>
+                                                @Html.ActionLink("Register as a new user", "Register", "Account")
+                                            </p>
+                                        }
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

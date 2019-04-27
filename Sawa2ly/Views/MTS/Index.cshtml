@@ -2,6 +2,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/CustomersDash/_LayoutC.cshtml";
 }
+@model IEnumerable<Sawa2ly.Models.ProjectTrainees>
 
 <script>
     $(document).ready(function () {
@@ -112,38 +113,68 @@
     });
 </script>
 
-<div class="row">
-    <div class="col-md-3">
-        <div class="profile-sidebar" style="background-color:#e6e6e6">
-            <!-- SIDEBAR USERPIC -->
-            <div class="profile-userpic">
-                <img src="~/Sources/blur.jpg" class="img-responsive" alt="">
+<section class="latest py-5" id="latest">
+    <div class="row">
+        <h5 class="section-title h1">Current Projects</h5>
+        <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+            <div class="MultiCarousel-inner">
+
+                @foreach (var projectTrainees in Model)
+                {
+                    if (projectTrainees.Project.Status != 1)
+                    {
+
+                        <div class="item">
+
+                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                                <div class="mainflip">
+                                    <div class="frontside">
+                                        <div class="card">
+                                            <div class="card-body text-center">
+                                                <p>
+                                                    <img class="img-fluid" src="~/Sources/images.jpg" alt="card image">
+                                                </p>
+                                                <h4 class="card-title">@projectTrainees.Project.Name</h4>
+                                                <h6 class="card-text">@String.Concat(projectTrainees.Project.Customer.FName, " ", projectTrainees.Project.Customer.LName)</h6>
+                                                <h6 class="card-text">@projectTrainees.Project.Customer.Email</h6>
+                                                <h6 class="card-text">@projectTrainees.Project.Customer.PhoneNumber</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="backside">
+                                        <div class="card">
+                                            <div class="card-body text-center mt-4">
+                                                <h4 class="card-title">@projectTrainees.Project.Name</h4>
+                                                <p class="card-text">@projectTrainees.Project.Description</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    }
+                }
+
+
             </div>
-            <!-- END SIDEBAR USERPIC -->
-            <!-- SIDEBAR USER TITLE -->
-            <div class="profile-usertitle">
-                <div class="profile-usertitle-name">
-                    Adel Reda
-                </div>
-                <div class="profile-usertitle-job">
-                    Markting Director
-                </div>
-                <div class="profile-usertitle-job">
-                    adelredaa97@gmail.com
-                </div>
-                <div class="profile-usertitle-job">
-                    01279767022
-                </div>
-            </div>
-            <!-- END SIDEBAR USER TITLE -->
+            <button class="btn btn-primary leftLst"><</button>
+            <button class="btn btn-primary rightLst">></button>
         </div>
     </div>
-    <div class="col-md-9">
-        <section class="latest py-5" id="latest">
-            <div class="row">
-                <h5 class="section-title h1">Current Projects</h5>
-                <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
-                    <div class="MultiCarousel-inner">
+</section>
+<hr />
+<section class="latest py-5" id="latest">
+    <div class="row">
+        <h5 class="section-title h1">Latest Projects</h5>
+        <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+            <div class="MultiCarousel-inner">
+                @foreach (var projectTrainees in Model)
+                {
+                    if (projectTrainees.Project.Status == 1)
+                    {
+
                         <div class="item">
 
                             <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
@@ -152,18 +183,20 @@
                                         <div class="card">
                                             <div class="card-body text-center">
                                                 <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
+                                                    <img class="img-fluid" src="~/Sources/images.jpg" alt="card image">
                                                 </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                                <h4 class="card-title">@projectTrainees.Project.Name</h4>
+                                                <h6 class="card-text">@String.Concat(projectTrainees.Project.Customer.FName, " ", projectTrainees.Project.Customer.LName)</h6>
+                                                <h6 class="card-text">@projectTrainees.Project.Customer.Email</h6>
+                                                <h6 class="card-text">@projectTrainees.Project.Customer.PhoneNumber</h6>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="backside">
                                         <div class="card">
                                             <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
+                                                <h4 class="card-title">@projectTrainees.Project.Name</h4>
+                                                <p class="card-text">@projectTrainees.Project.Description</p>
                                             </div>
                                         </div>
                                     </div>
@@ -171,428 +204,12 @@
                             </div>
 
                         </div>
-                        <div class="item">
 
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <button class="btn btn-primary leftLst"><</button>
-                    <button class="btn btn-primary rightLst">></button>
-                </div>
+                    }
+                }
             </div>
-        </section>
-        <hr />
-        <section class="latest py-5" id="latest">
-            <div class="row">
-                <h5 class="section-title h1">Latest Projects</h5>
-                <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
-                    <div class="MultiCarousel-inner">
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p>
-                                                    <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                                </p>
-                                                <h4 class="card-title">Iphone</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h4 class="card-title">Sunlimetech</h4>
-                                                <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <button class="btn btn-primary leftLst"><</button>
-                    <button class="btn btn-primary rightLst">></button>
-                </div>
-            </div>
-        </section>
+            <button class="btn btn-primary leftLst"><</button>
+            <button class="btn btn-primary rightLst">></button>
+        </div>
     </div>
-</div>
+</section>
