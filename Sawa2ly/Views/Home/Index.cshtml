@@ -1,49 +1,23 @@
-﻿@model IEnumerable<Sawa2ly.Models.Project>
-@{
+﻿@{
     ViewBag.Title = "Home Page";
 }
 @using Sawa2ly.Extensions
 @model IEnumerable<Sawa2ly.Models.Project>
 
+<head>
 
+</head>
 @if (Request.IsAuthenticated)
 {
     if (User.Identity.GetUserRule() == "1")
     {
         @Html.Partial("_CreateProject")
     }
-<<<<<<< HEAD
-=======
     <!-- Unassigned Projects -->
->>>>>>> master
     <section id="team" class="pb-5">
         <div class="container">
             <h5 class="section-title h1">UnAssigned Projects</h5>
             <div class="row">
-<<<<<<< HEAD
-                @foreach (var project in Model)
-                {
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                            <div class="mainflip">
-                                <div class="frontside">
-                                    <div class="card">
-                                        <div class="card-body text-center">
-                                            <p>
-                                                <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
-                                            </p>
-                                            <h4 class="card-title">@project.Name</h4>
-                                            <p class="card-text">@project.Description</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="backside">
-                                    <div class="card">
-                                        <div class="card-body text-center mt-4">
-                                            <h4 class="card-title">Hello</h4>
-                                            <p class="card-text">Yes</p>
-                                        </div>
-=======
 
                 @foreach (var project in Model)
                 {
@@ -55,12 +29,9 @@
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <p>
-                                            <img class="img-fluid" src="~/Sources/images.jpg" alt="card image">
+                                            <img class=" img-fluid" src="~/Sources/images.jpg" alt="card image">
                                         </p>
                                         <h4 class="card-title">@project.Name</h4>
-                                        <h6 class="card-text">@String.Concat(project.Customer.FName, " ", project.Customer.LName)</h6>
-                                        <h6 class="card-text">@project.Customer.Email</h6>
-                                        <h6 class="card-text">@project.Customer.PhoneNumber</h6>
                                     </div>
                                 </div>
                             </div>
@@ -69,45 +40,12 @@
                                     <div class="card-body text-center mt-4">
                                         <h4 class="card-title">@project.Name</h4>
                                         <p class="card-text">@project.Description</p>
->>>>>>> master
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-<<<<<<< HEAD
-                }
-            </div>
-        </div>
-
-    </section>
-    <!-- Unassigned Projects -->
-    //}
-}
-
-else
-{
-    <div class="mt-5"></div>
-    <section class="latest py-5" id="latest">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h2>20 Years of Experience in Marketing Services.</h2>
-                    <p class="py-3">Sawa2ly is a commerce management system that allows customers that have Products to be able to Market their products by communicating with Marketing Directors and Marketing Team Leaders to market their products in an easy and professional way. .</p>
-                    <button type="button" class="btn btn-outline-danger mb-3">Find Out More About us</button>
                 </div>
-                <div class="col-md-4 latest-box">
-                    <a href="#">
-                        <img class="no-mp" src="~/Sources/home.jpg">
-                        <div class="">
-                            <div class="bg-red card-body">
-                                <h5>Financial Services</h5>
-                            </div>
-                        </div>
-                    </a>
-=======
-                </div>
->>>>>>> master
 
                 }
 
