@@ -1,4 +1,5 @@
-﻿
+﻿@using Sawa2ly.Models
+@model IEnumerable<Sawa2ly.Models.ApplicationUser>
 @{
     ViewBag.Title = "ListUsers";
     Layout = "~/Views/AdminsDash/_LayoutA.cshtml";
@@ -23,141 +24,63 @@
         }
 </style>
 <div class="container">
-
-    <div class="row">
-        <div class="list-group container-fluid">
-            <div class="list-group-item clearfix">
-                <div class="profile-teaser-left col-lg-3">
-                    <div class="profile-img"><img src="~/Sources/avatar.png" /></div>
-                </div>
-                <div class="profile-teaser-main col-lg-9">
-                    <div class="row">
-                        <h2 class="col-lg-5">Name</h2>
-                        <div class="row col-lg-4" style="padding-top:15px">
-                            <form action="" method="post" style="margin-right:10px">
-                                <button class="btn btn-default"><i class="fa fa-fw fa-eye"></i> Show</button>
-                            </form>
-                            <form action="" method="post">
-                                <input type="submit" class="btn btn-danger" value="Delete" style="margin-top:0" />
-                            </form>
+    @foreach (var user in Model)
+    {
+        if (user.UserRule != "5")
+        {
+            <div class="row">
+                <div class="list-group container-fluid">
+                    <div class="list-group-item clearfix">
+                        <div class="profile-teaser-left col-lg-3">
+                            <div class="profile-img"><img src="~/Sources/avatar.png"/></div>
                         </div>
-                    </div>
-                    <div class="row col-lg-8" style="margin-top:10px;">
-                        <div class="info"><span class="">Info:</span> Marketing Director</div>
-                        <div class="info"><span class="">Email:</span>adelredaa97@gmail.com</div>
-                    </div>
-                </div>
-            </div><!-- item -->
-        </div>
-    </div>
+                        <div class="profile-teaser-main col-lg-9">
+                            <div class="row">
+                                <h2 class="col-lg-5">@user.FName @user.LName</h2>
+                                <div class="row col-lg-4" style="padding-top: 15px">
+                                    <form action="" method="delete" style="margin-right: 10px">
+                                        <a href="@Url.Action("DeleteUsers", "Admin", new { id=@user.Id})">
+                                            <button class="btn btn-default"><i class="fa fa-fw fa-eye"></i> Show</button>
+                                        </a>
+                                    </form>
+                                    <form action="" method="post">
+                                        
 
-    <div class="row">
-        <div class="list-group container-fluid">
-            <div class="list-group-item clearfix">
-                <div class="profile-teaser-left col-lg-3">
-                    <div class="profile-img"><img src="~/Sources/avatar.png" /></div>
-                </div>
-                <div class="profile-teaser-main col-lg-9">
-                    <div class="row">
-                        <h2 class="col-lg-5">Name</h2>
-                        <div class="row col-lg-4" style="padding-top:15px">
-                            <form action="" method="post" style="margin-right:10px">
-                                <button class="btn btn-default"><i class="fa fa-fw fa-eye"></i> Show</button>
-                            </form>
-                            <form action="" method="post">
-                                <input type="submit" class="btn btn-danger" value="Delete" style="margin-top:0" />
-                            </form>
+                                        <input type="submit" class="btn btn-danger" value="Delete" style="margin-top: 0"/>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row col-lg-8" style="margin-top: 10px;">
+                                <div class="info">
+                                    <span class="">Info:</span>
+                                    @if (user.UserRule == "2")
+                                    {
+                                        <h>Marketing Director</h>
+                                    }
+                                    @if (user.UserRule == "3")
+                                    {
+                                        <h>Marketing Team Leader</h>
+                                    }
+                                    @if (user.UserRule == "4")
+                                    {
+                                        <h>Marketing Trainee</h>
+                                    }
+                                    @if (user.UserRule == "1")
+                                    {
+                                        <h>Customer</h>
+                                    }
+                                </div>
+                                <div class="info"><span class="">Email:</span>@user.Email</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row col-lg-8" style="margin-top:10px;">
-                        <div class="info"><span class="">Info:</span> Marketing Director</div>
-                        <div class="info"><span class="">Email:</span>adelredaa97@gmail.com</div>
-                    </div>
+                    </div><!-- item -->
                 </div>
-            </div><!-- item -->
-        </div>
-    </div>
+            </div>
 
-    <div class="row">
-        <div class="list-group container-fluid">
-            <div class="list-group-item clearfix">
-                <div class="profile-teaser-left col-lg-3">
-                    <div class="profile-img"><img src="~/Sources/avatar.png" /></div>
-                </div>
-                <div class="profile-teaser-main col-lg-9">
-                    <div class="row">
-                        <h2 class="col-lg-5">Name</h2>
-                        <div class="row col-lg-4" style="padding-top:15px">
-                            <form action="" method="post" style="margin-right:10px">
-                                <button class="btn btn-default"><i class="fa fa-fw fa-eye"></i> Show</button>
-                            </form>
-                            <form action="" method="post">
-                                <input type="submit" class="btn btn-danger" value="Delete" style="margin-top:0" />
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row col-lg-8" style="margin-top:10px;">
-                        <div class="info"><span class="">Info:</span> Marketing Director</div>
-                        <div class="info"><span class="">Email:</span>adelredaa97@gmail.com</div>
-                    </div>
-                </div>
-            </div><!-- item -->
-        </div>
-    </div>
+        }
+    }
 
-    <div class="row">
-        <div class="list-group container-fluid">
-            <div class="list-group-item clearfix">
-                <div class="profile-teaser-left col-lg-3">
-                    <div class="profile-img"><img src="~/Sources/avatar.png" /></div>
-                </div>
-                <div class="profile-teaser-main col-lg-9">
-                    <div class="row">
-                        <h2 class="col-lg-5">Name</h2>
-                        <div class="row col-lg-4" style="padding-top:15px">
-                            <form action="" method="post" style="margin-right:10px">
-                                <button class="btn btn-default"><i class="fa fa-fw fa-eye"></i> Show</button>
-                            </form>
-                            <form action="" method="post">
-                                <input type="submit" class="btn btn-danger" value="Delete" style="margin-top:0" />
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row col-lg-8" style="margin-top:10px;">
-                        <div class="info"><span class="">Info:</span> Marketing Director</div>
-                        <div class="info"><span class="">Email:</span>adelredaa97@gmail.com</div>
-                    </div>
-                </div>
-            </div><!-- item -->
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="list-group container-fluid">
-            <div class="list-group-item clearfix">
-                <div class="profile-teaser-left col-lg-3">
-                    <div class="profile-img"><img src="~/Sources/avatar.png" /></div>
-                </div>
-                <div class="profile-teaser-main col-lg-9">
-                    <div class="row">
-                        <h2 class="col-lg-5">Name</h2>
-                        <div class="row col-lg-4" style="padding-top:15px">
-                            <form action="" method="post" style="margin-right:10px">
-                                <button class="btn btn-default"><i class="fa fa-fw fa-eye"></i> Show</button>
-                            </form>
-                            <form action="" method="post">
-                                <input type="submit" class="btn btn-danger" value="Delete" style="margin-top:0" />
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row col-lg-8" style="margin-top:10px;">
-                        <div class="info"><span class="">Info:</span> Marketing Director</div>
-                        <div class="info"><span class="">Email:</span>adelredaa97@gmail.com</div>
-                    </div>
-                </div>
-            </div><!-- item -->
-        </div>
-    </div>
-    
 
 </div>
