@@ -16,7 +16,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("EditProfile", "Admin")">
+                        <a href="@Url.Action("EditProfile", "Admin", new { id = User.Identity.GetUserID() } )">
                             <i class="far fa-edit"></i>
                             <span>Edit Profile</span>
                         </a>
@@ -44,7 +44,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("EditProfile", "MD")">
+                        <a href="@Url.Action("EditProfile", "MD", new { id = User.Identity.GetUserID() })">
                             <i class="far fa-edit"></i>
                             <span>Edit Profile</span>
                         </a>
@@ -78,7 +78,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("EditProfile", "MTL")">
+                        <a href="@Url.Action("EditProfile", "MTL", new { id = User.Identity.GetUserID() })">
                             <i class="far fa-edit"></i>
                             <span>Edit Profile</span>
                         </a>

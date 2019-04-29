@@ -74,17 +74,30 @@ namespace Sawa2ly.Controllers
 
         }
 
-        public ActionResult EditProfile()
+        public ActionResult EditProfile(string id)
         {
-            if (User.Identity.GetUserRule() == "2")
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("RedirectToProfile", "Home");
-            }
 
+            var user = db.Users.SingleOrDefault(c => c.Id == id);
+
+
+            return View(user);
+        }
+
+
+        [HttpPost]
+        public ActionResult SaveEdit(string first_name, string last_name, string email, string phone, string currpassword, string imegurl)
+        {
+            var id = User.Identity.GetUserID();
+            var user = db.Users.SingleOrDefault(c => c.Id == id);
+            user.FName = first_name;
+            user.LName = last_name;
+            user.PhoneNumber = phone;
+            user.Email = email;
+            user.UserName = email;
+            user.UserImageUrl = "~/Sources/" + imegurl;
+
+            db.SaveChanges();
+            return RedirectToAction("Index", "Customer");
         }
 
 

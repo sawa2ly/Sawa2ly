@@ -23,7 +23,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="@Url.Action("EditProfile", "Customer")">
+                            <a href="@Url.Action("EditProfile", "Customer" , new { id = User.Identity.GetUserID() } )">
                                 <i class="far fa-edit"></i>
                                 <span>Edit Profile</span>
                             </a>
@@ -56,7 +56,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="@Url.Action("EditProfile", "MTS")">
+                            <a href="@Url.Action("EditProfile", "MTS" , new { id = User.Identity.GetUserID() } )">
                                 <i class="far fa-edit"></i>
                                 <span>Edit Profile</span>
                             </a>

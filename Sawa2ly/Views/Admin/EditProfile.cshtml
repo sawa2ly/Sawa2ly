@@ -1,16 +1,21 @@
-﻿
+﻿@model Sawa2ly.Models.ApplicationUser
+
 @{
     ViewBag.Title = "EditProfile";
     Layout = "~/Views/AdminsDash/_LayoutA.cshtml";
 }
 
 <style>
-    .bu{
-        background-color: #555555;color: white;border: 2px solid #555555;
+    .bu {
+        background-color: #555555;
+        color: white;
+        border: 2px solid #555555;
     }
-    .bu:hover{
-        background-color: white;color: #555555;
-    }
+
+        .bu:hover {
+            background-color: white;
+            color: #555555;
+        }
 </style>
 
 <h2 style="margin-bottom:30px;">Edit Your Info</h2>
@@ -21,7 +26,7 @@
         <div class="col-sm-12">
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
-                    <form class="form" action="##" method="post" id="registrationForm">
+                    <form class="form" action="@Url.Action("SaveEdit", "Admin")" method="post" id="registrationForm">
 
                         <div class="row">
                             <div class="col-sm-4">
@@ -35,12 +40,12 @@
 
                             <div class="col-sm-8">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="first_name" placeholder="first name">
-                                    <input type="text" class="form-control" name="last_name" placeholder="last name">
-                                    <input type="text" class="form-control" name="phone" placeholder="enter phone">
-                                    <input type="email" class="form-control" name="email" placeholder="you@email.com">
-                                    <input type="password" class="form-control" name="currpassword"  placeholder="Current password">
-                                    <input type="password" class="form-control" name="newpassword"  placeholder="New password">
+                                    <input type="text" class="form-control" name="first_name" placeholder="first name" value="@Model.FName">
+                                    <input type="text" class="form-control" name="last_name" placeholder="last name" value="@Model.LName">
+                                    <input type="text" class="form-control" name="phone" placeholder="enter phone"value="@Model.PhoneNumber">
+                                    <input type="email" class="form-control" name="email" placeholder="you@email.com"value="@Model.Email">
+                                    <input type="password" class="form-control" name="currpassword" placeholder="Current password">
+                                    <input type="password" class="form-control" name="newpassword" placeholder="New password">
                                 </div>
                             </div>
                         </div>

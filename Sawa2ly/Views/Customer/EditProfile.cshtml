@@ -1,4 +1,4 @@
-﻿
+﻿@model Sawa2ly.Models.ApplicationUser
 @{
     ViewBag.Title = "EditProfile";
     Layout = "~/Views/CustomersDash/_LayoutC.cshtml";
@@ -25,7 +25,7 @@
         <div class="col-sm-12">
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
-                    <form class="form" action="##" method="post" id="registrationForm">
+                    <form class="form" action="@Url.Action("SaveEdit", "Customer")" method="post" id="registrationForm">
 
                         <div class="row">
                             <div class="col-sm-4">
@@ -33,16 +33,16 @@
                                 <div class="text-center">
                                     <img src="~/Sources/avatar.png" style="width: 150px;height: 150px;border-radius:50%;" class="avatar img-circle img-thumbnail" alt="avatar">
                                     <h6>Upload a different photo...</h6>
-                                    <input type="file" class="text-center center-block file-upload">
+                                    <input type="file"  name="imegurl" class="text-center center-block file-upload" >
                                 </div>
                             </div>
 
                             <div class="col-sm-8">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="first_name" placeholder="first name">
-                                    <input type="text" class="form-control" name="last_name" placeholder="last name">
-                                    <input type="text" class="form-control" name="phone" placeholder="enter phone">
-                                    <input type="email" class="form-control" name="email" placeholder="you@email.com">
+                                    <input type="text" class="form-control" name="first_name" placeholder="first name" value="@Model.FName">
+                                    <input type="text" class="form-control" name="last_name" placeholder="last name" value="@Model.LName">
+                                    <input type="text" class="form-control" name="phone" placeholder="enter phone" value="@Model.PhoneNumber">
+                                    <input type="email" class="form-control" name="email" placeholder="you@email.com" value="@Model.Email">
                                     <input type="password" class="form-control" name="currpassword" placeholder="Current password">
                                     <input type="password" class="form-control" name="newpassword" placeholder="New password">
                                 </div>
