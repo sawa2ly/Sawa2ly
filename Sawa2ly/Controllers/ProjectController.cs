@@ -195,6 +195,7 @@ namespace Sawa2ly.Controllers
 
         }
 
+
         [HttpPost]
         public ActionResult MTSDeleteRequest(int proId, int reqId)
         {
@@ -203,6 +204,71 @@ namespace Sawa2ly.Controllers
             db.SaveChanges();
             return RedirectToAction("AddMTS", new { id = proId });
         }
+
+        
+        [HttpPost]
+        public ActionResult LeaveProject(int proId)
+        {
+            var userId = User.Identity.GetUserID();
+            var userRole = User.Identity.GetUserRule();
+            if (userRole == "2")//Md
+            {
+                var project = db.Project.First(a => a.Id == proId);
+                project.MDID = null;
+                project.MTLID = null;
+                project.StartDate = null;
+                project.EndDate = null;
+                project.Status = null;
+                project.Price = null;
+                db.SaveChanges();
+                db.ProjectTrainees.RemoveRange(db.ProjectTrainees.Where(c => c.ProjectId == proId));
+                db.SaveChanges();
+            }
+            else if (userRole == "3")
+            {
+                var project = db.Project.First(a => a.Id == proId);
+                project.MTLID = null;
+                db.SaveChanges();
+            }
+            else
+            {
+                var pt = db.ProjectTrainees.First(a => a.ProjectId == proId && a.MTSID == userId);
+                db.ProjectTrainees.Remove(pt);
+                db.SaveChanges();
+            }
+            //var PR = db.ProjectRequestsMD.Single(a => a.Id == reqId);
+            //db.ProjectRequestsMD.Remove(PR);
+            //db.SaveChanges();
+            return RedirectToAction("Index", new { id = proId });
+            
+        }
+
+        [HttpPost]
+        public ActionResult DeleteMTL(int proId)
+        {
+            if (ModelState.IsValid)
+            {
+                var project = db.Project.First(a => a.Id == proId);
+                project.MTLID = null;
+                db.SaveChanges();
+                return RedirectToAction("Index", new { id = proId });
+            }
+            return RedirectToAction("Index", new { id = proId });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteMTS(int proId , int TaiId)
+        {
+            var PR = db.ProjectTrainees.Single(a => a.Id == TaiId);
+            db.ProjectTrainees.Remove(PR);
+            db.SaveChanges();
+            return RedirectToAction("Index", new { id = proId });
+            
+        }
+
+
+
+
 
     }
 }

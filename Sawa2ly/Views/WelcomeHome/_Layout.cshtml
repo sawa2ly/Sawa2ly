@@ -10,13 +10,19 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="~/Sources/fontawesome-free-5.8.1-web/css/all.css" crossorigin="anonymous">
+    <style>
+        .b{
+            box-shadow: 0px 0px 10px #ccc;
+            border-radius: 10px;
+           }
+    </style>
 </head>
 <body>
     @Html.Partial("_header")
 
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-9 b">
                 @RenderBody()
             </div>
 
@@ -27,10 +33,9 @@
             </div>
         </div>
     </div>
-    <hr />
 
 
-    <footer style="background-color:#f8f8f8;padding:40px;">
+    <footer style="background-color:#f8f8f8;padding:40px;box-shadow: 0px 0px 10px #ccc;margin-top:30px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">

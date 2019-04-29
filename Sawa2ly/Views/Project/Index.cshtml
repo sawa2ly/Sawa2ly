@@ -141,6 +141,13 @@
               background-color: white;color: #555555;
         }
 
+        .delbu{
+              background-color:#dc3545;color: white;border: 2px solid #dc3545;margin-bottom:5px;
+        }
+        .delbu:hover{
+              background-color: white;color: #dc3545;
+        }
+
     </style>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -264,6 +271,13 @@
 
 
                     }
+                    else if (ViewBag.accessibility == "member" && User.Identity.GetUserRule() != "1")
+                    {
+                        <form action="@Url.Action("LeaveProject", "Project")" method="post">
+                            <input name="proId" type="hidden" value="@Model.Project.Id" />
+                            <input type="submit" class="btn btn-danger" value="Leave Project" style="margin-top:20px;display:block" />
+                        </form>
+                    }
 
 
                 </div>
@@ -348,30 +362,42 @@
                                 <div class="col-md-6">
                                     <label>Team Leader</label>
                                 </div>
-                                <div class="col-md-6">
+                                
                                     @if (Model.Project.MTLID != null)
                                     {
-                                        <a href="@Url.Action("", "Project", new { id= @Model.Project.Id })" style="color:black">
-                                            @String.Concat(Model.Project.MTL.FName, " ", Model.Project.MTL.LName)
-                                        </a>
-                                        
+                                        <div class="col-md-4">
+                                            <a href="@Url.Action("", "Project", new { id= @Model.Project.Id })" style="color:black">
+                                                @String.Concat(Model.Project.MTL.FName, " ", Model.Project.MTL.LName)
+                                            </a>
+                                        </div>
+                                        if (User.Identity.GetUserID() == @Model.Project.MDID)
+                                        {
+                                            <div class="col-lg-2">
+                                                <form action="@Url.Action("DeleteMTL", "Project")" method="post">
+                                                    <input name="proId" type="hidden" value="@Model.Project.Id" />
+                                                    <button type="submit" class="btn btn-sm btn-default delbu"><i class="fa fa-fw fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        }
                                     }
                                     else
                                     {
-                                        if (User.Identity.GetUserID() == @Model.Project.MDID)
-                                        {
-                                            <a href="@Url.Action("AddMTL", "Project", new { id= @Model.Project.Id })" style="color:green">
-                                                Add Leader
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <p>Not Set</p>
-                                        }
+                                        <div class="col-md-4">
+                                            @if (User.Identity.GetUserID() == @Model.Project.MDID)
+                                            {
+                                                <a href="@Url.Action("AddMTL", "Project", new { id= @Model.Project.Id })" style="color:green">
+                                                    Add Leader
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <p>Not Set</p>
+                                            }
+                                        </div>
                                     }
 
 
-                                </div>
+                                
                             </div>
 
                             @foreach (var trainee in Model.ProjectTrainees)
@@ -380,11 +406,21 @@
                                     <div class="col-md-6">
                                         <label>Team Trainee</label>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <a href="@Url.Action("", "Project", new { id= @Model.Project.Id })" style="color:black">
                                             @String.Concat(@trainee.MTS.FName, " ", @trainee.MTS.LName)
                                         </a>
                                     </div>
+                                    @if (User.Identity.GetUserID() == @Model.Project.MDID || User.Identity.GetUserID() == @Model.Project.MTLID)
+                                    {
+                                    <div class="col-lg-2">
+                                        <form action="@Url.Action("DeleteMTS", "Project")" method="post">
+                                            <input name="proId" type="hidden" value="@Model.Project.Id" />
+                                            <input name="TaiId" type="hidden" value="@trainee.Id" />
+                                            <button type="submit" class="btn btn-sm btn-default delbu"><i class="fa fa-fw fa-trash"></i></button>
+                                        </form>
+                                    </div>
+                                    }
                                 </div>
                             }
 
