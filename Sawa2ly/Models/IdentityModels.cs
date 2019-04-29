@@ -44,6 +44,8 @@ namespace Sawa2ly.Models
         public System.Data.Entity.DbSet<Sawa2ly.Models.ProjectTrainees> ProjectTrainees { get; set; }
         public System.Data.Entity.DbSet<Sawa2ly.Models.ProjectRequestsMD> ProjectRequestsMD { get; set; }
         public System.Data.Entity.DbSet<Sawa2ly.Models.ProjectsJoinRequests> ProjectsJoinRequests { get; set; }
+        public System.Data.Entity.DbSet<Sawa2ly.Models.TraineeEvaluate> TraineeEvaluate { get; set; }
+        public System.Data.Entity.DbSet<Sawa2ly.Models.Posts> Posts { get; set; }
 
     }
 }

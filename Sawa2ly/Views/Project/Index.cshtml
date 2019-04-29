@@ -5,6 +5,27 @@
 }
 @model Sawa2ly.ViewModels.ProjectAndTrainees
 
+@helper Role (string role)
+{
+    switch (role)
+    {
+        case "1" : <div class="h7 text-muted">Customer</div> ;
+            break;
+        case "2": <div class="h7 text-muted">Marketing Director</div> ;
+            break;
+        case "3": <div class="h7 text-muted">Markting Team Leader</div> ;
+            break;
+        case "4": <div class="h7 text-muted">Markting Trainee</div> ;
+            break;
+
+}
+
+
+
+
+}
+
+
 <!DOCTYPE html>
 
 <html>
@@ -157,19 +178,24 @@
                 $('#project').hide();
                 $('#team').hide();
                 $('#posts').hide();
+                $('#trainees').hide();
             }
             function DisableTabs() {
                 $('#project').hide();
                 $('#team').hide();
                 $('#posts').hide();
                 $('#home').hide();
+                $('#trainees').hide();
                 $('#home-tab').removeClass('active');
                 $('#profile-tab').removeClass('active');
                 $('#team-tab').removeClass('active');
                 $('#posts-tab').removeClass('active');
+                $('#trainees-tab').removeClass('active');
             }
             $('.nav-tabs li a[href="#home"]').on('click', function (event) {
                 DisableTabs();
+                event.preventDefault();
+                event.stopImmediatePropagation();
                 var tabid = $(this).attr('href');
                 $('#home-tab').addClass('active');
                 $('#home-tab').siblings().removeClass('active');
@@ -178,6 +204,8 @@
             });
             $('.nav-tabs li a[href="#project"]').on('click', function (event) {
                 DisableTabs();
+                event.preventDefault();
+                event.stopImmediatePropagation();
                 var tabid = $(this).attr('href');
                 $('#profile-tab').addClass('nav-link active');
                 $('#profile-tab').siblings().removeClass('nav-link active');
@@ -186,6 +214,8 @@
             });
             $('.nav-tabs li a[href="#team"]').on('click', function (event) {
                 DisableTabs();
+                event.preventDefault();
+                event.stopImmediatePropagation();
                 var tabid = $(this).attr('href');
                 $('#team-tab').addClass('active');
                 $('#team-tab').siblings().removeClass('active');
@@ -194,10 +224,22 @@
             });
             $('.nav-tabs li a[href="#posts"]').on('click', function (event) {
                 DisableTabs();
+                event.preventDefault();
+                event.stopImmediatePropagation();
                 var tabid = $(this).attr('href');
                 $('#posts-tab').addClass('active');
                 $('#posts-tab').siblings().removeClass('active');
                 var tabpanel = $(''+ tabid).show();
+                $(tabpanel).addClass('tab-pane fade show active');
+            });
+            $('.nav-tabs li a[href="#trainees"]').on('click', function (event) {
+                DisableTabs();
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                var tabid = $(this).attr('href');
+                $('#trainees-tab').addClass('active');
+                $('#trainees-tab').siblings().removeClass('active');
+                var tabpanel = $('' + tabid).show();
                 $(tabpanel).addClass('tab-pane fade show active');
             });
         });
@@ -232,6 +274,12 @@
                             <li class="nav-item" id="l4">
                                 <a class="nav-link" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="profile" aria-selected="false">Posts</a>
                             </li>
+                            if (User.Identity.GetUserID() == @Model.Project.MDID || User.Identity.GetUserID() == @Model.Project.MTLID)
+                            {
+                                <li class="nav-item" id="l5">
+                                    <a class="nav-link" id="trainees-tab" data-toggle="tab" href="#trainees" role="tab" aria-controls="profile" aria-selected="false">Trainees Review</a>
+                                </li>
+                            }
                         }
 
                     </ul>
@@ -455,91 +503,52 @@
                                                 </ul>
                                             </div>
                                             <div class="card-body">
-                                                <div class="tab-content" id="myTabContent">
-                                                    <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
-                                                        <div class="form-group">
-                                                            <label class="sr-only" for="message">post</label>
-                                                            <textarea class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
+                                                <form action="@Url.Action("Post", "Project")" method="post">
+                                                    <div class="tab-content" id="myTabContent">
+                                                        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                                            <div class="form-group">
+                                                                <label class="sr-only" for="message">post</label>
+                                                                <input name="proId" type="hidden" value="@Model.Project.Id" />
+                                                                <textarea name="msg" class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="btn-toolbar justify-content-between">
+                                                        <div class="btn-group">
+                                                            <button type="submit" class="btn btn-primary">share</button>
                                                         </div>
                                                     </div>
-
-                                                </div>
-                                                <div class="btn-toolbar justify-content-between">
-                                                    <div class="btn-group">
-                                                        <button type="submit" class="btn btn-primary">share</button>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
 
-                                        <div class="card gedf-card" style="margin-bottom:30px;">
-                                            <div class="card-header">
-                                                <div class="d-flex justify-content-between align-items-center">
+                                        @foreach (var post in Model.Posts)
+                                        {
+                                            <div class="card gedf-card" style="margin-bottom:30px;">
+                                                <div class="card-header">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <div class="mr-2">
-                                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                                        </div>
-                                                        <div class="ml-2">
-                                                            <div class="h5 m-0">Adel Reda</div>
-                                                            <div class="h7 text-muted">Markting Director</div>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <div class="mr-2">
+                                                                <img class="rounded-circle" width="45" src="@Url.Content(post.User.UserImageUrl)" alt="">
+                                                            </div>
+                                                            <div class="ml-2">
+                                                                <div class="h5 m-0">@String.Concat(post.User.FName, " ", post.User.LName)</div>
+                                                                @Role(post.User.UserRule)
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="card-body">
+                                                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>@post.Date</div>
+                                                    <p class="card-text">
+                                                        @post.Message
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="card-body">
-                                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
-                                                <p class="card-text">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
-                                                    sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
-                                                </p>
-                                            </div>
-                                        </div>
+                                        }
 
-                                        <div class="card gedf-card" style="margin-bottom:30px;">
-                                            <div class="card-header">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <div class="mr-2">
-                                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                                        </div>
-                                                        <div class="ml-2">
-                                                            <div class="h5 m-0">Adel Reda</div>
-                                                            <div class="h7 text-muted">Markting Director</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
-                                                <p class="card-text">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
-                                                    sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
-                                                </p>
-                                            </div>
-                                        </div>
 
-                                        <div class="card gedf-card" style="margin-bottom:30px;">
-                                            <div class="card-header">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <div class="mr-2">
-                                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                                        </div>
-                                                        <div class="ml-2">
-                                                            <div class="h5 m-0">Adel Reda</div>
-                                                            <div class="h7 text-muted">Markting Director</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
-                                                <p class="card-text">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
-                                                    sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
-                                                </p>
-                                            </div>
-                                        </div>
 
                                     </div>
 
@@ -548,6 +557,50 @@
 
 
                         </div>
+
+                        if (User.Identity.GetUserID() == @Model.Project.MDID)
+                        {
+                            <div class="tab-pane fade" id="trainees" role="tabpanel" aria-labelledby="profile-tab">
+
+                                @foreach (var trainee in Model.TraineeEvaluate)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>@String.Concat(@trainee.MTS.FName, " ", @trainee.MTS.LName)</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <p>@trainee.Message</p>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        }
+                        if (User.Identity.GetUserID() == @Model.Project.MTLID)
+                        {
+                            <div class="tab-pane fade" id="trainees" role="tabpanel" aria-labelledby="profile-tab">
+
+                                @foreach (var trainee in Model.TraineeEvaluate)
+                                {
+                                    <div class="row" style="align-items: baseline;">
+                                        <div class="col-md-3">
+                                            <label>@String.Concat(@trainee.MTS.FName, " ", @trainee.MTS.LName)</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <form action="@Url.Action("Evaluate", "Project")" method="post" class="row" style="align-items: baseline;">
+                                                <input name="proId" type="hidden" value="@Model.Project.Id" />
+                                                <input name="TEID" type="hidden" value="@trainee.Id" />
+                                                <input name="message" type="text" class="form-control col-lg-9" value="@trainee.Message"/>
+                                                <button type="submit" class="btn btn-sm btn-default delbu col-lg-2" style="margin-left:9px;"><i class="fa fa-fw fa-star"></i>Review</button>
+                                            </form>
+                                        </div>
+                                        
+                                    </div>
+                                }
+
+                            </div>
+                        }
+
 
                     }
 

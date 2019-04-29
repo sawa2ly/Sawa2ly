@@ -10,5 +10,7 @@ namespace Sawa2ly.ViewModels
     {
         public Project Project { get; set; }
         public List<ProjectTrainees> ProjectTrainees { get; set; }
+        public List<Posts> Posts { get; set; }
+        public List<TraineeEvaluate> TraineeEvaluate { get; set; }
     }
 }

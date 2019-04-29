@@ -84,6 +84,8 @@ namespace Sawa2ly.Controllers
             var PR = db.ProjectsJoinRequests.Single(a => a.Id == reqId);
             db.ProjectsJoinRequests.Remove(PR);
             db.SaveChanges();
+            db.TraineeEvaluate.Add(new TraineeEvaluate { ProjectId = proId, MTSID = MTSId , Message = "N/A"});
+            db.SaveChanges();
             return RedirectToAction("Requests");
 
         }

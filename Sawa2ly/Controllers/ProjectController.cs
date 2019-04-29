@@ -33,6 +33,8 @@ namespace Sawa2ly.Controllers
                     return HttpNotFound();
                 }
                 var projectTrainees = db.ProjectTrainees.Where(p => p.ProjectId == project.Id).Include(t => t.MTS).ToList();
+                var posts = db.Posts.Where(p => p.ProjectId == project.Id).Include(t => t.User).ToList();
+                var traineeevaluate = db.TraineeEvaluate.Where(p => p.ProjectId == project.Id).Include(t => t.MTS).ToList();
                 var userId = User.Identity.GetUserID();
                 if ( userId == project.CustomerId ||  userId == project.MDID || userId == project.MTLID)
                 {
@@ -63,7 +65,7 @@ namespace Sawa2ly.Controllers
                     //ProjectRequestsMD ProjectRequestsMD = db.ProjectRequestsMD.Find();
                 }
 
-                var model = new ProjectAndTrainees { Project = project , ProjectTrainees = projectTrainees};
+                var model = new ProjectAndTrainees { Project = project , ProjectTrainees = projectTrainees , Posts = posts , TraineeEvaluate = traineeevaluate};
                 return View(model);
             }
             else
@@ -235,10 +237,10 @@ namespace Sawa2ly.Controllers
                 var pt = db.ProjectTrainees.First(a => a.ProjectId == proId && a.MTSID == userId);
                 db.ProjectTrainees.Remove(pt);
                 db.SaveChanges();
+                var TE = db.TraineeEvaluate.Single(a => a.ProjectId == proId && a.MTSID == userId);
+                db.TraineeEvaluate.Remove(TE);
+                db.SaveChanges();
             }
-            //var PR = db.ProjectRequestsMD.Single(a => a.Id == reqId);
-            //db.ProjectRequestsMD.Remove(PR);
-            //db.SaveChanges();
             return RedirectToAction("Index", new { id = proId });
             
         }
@@ -260,13 +262,34 @@ namespace Sawa2ly.Controllers
         public ActionResult DeleteMTS(int proId , int TaiId)
         {
             var PR = db.ProjectTrainees.Single(a => a.Id == TaiId);
+            var MTSId = PR.MTSID;
             db.ProjectTrainees.Remove(PR);
+            db.SaveChanges();
+            var TE = db.TraineeEvaluate.Single(a => a.ProjectId == proId && a.MTSID == MTSId);
+            db.TraineeEvaluate.Remove(TE);
             db.SaveChanges();
             return RedirectToAction("Index", new { id = proId });
             
         }
 
+        [HttpPost]
+        public ActionResult Evaluate(int proId, int TEID, String message)
+        {
+            var TE = db.TraineeEvaluate.First(a => a.Id == TEID);
+            TE.Message = message;
+            db.SaveChanges();
+            return RedirectToAction("Index", new { id = proId });
 
+        }
+
+        [HttpPost]
+        public ActionResult Post(int proId, String msg)
+        {
+            var userId = User.Identity.GetUserID();
+            db.Posts.Add(new Posts { Message = msg , Date = DateTime.Now , ProjectId = proId , UserID = userId});
+            db.SaveChanges();
+            return RedirectToAction("Index", new { id = proId });
+        }
 
 
 
