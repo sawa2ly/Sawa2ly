@@ -1,4 +1,4 @@
-﻿
+﻿@using Sawa2ly.Extensions
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/AdminsDash/_LayoutA.cshtml";
@@ -12,22 +12,22 @@
                 <div class="profile-sidebar">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
-                        <img src="~/Sources/blur.jpg" class="img-responsive" alt="">
+                        <img src="@Url.Content(User.Identity.GetUserImageUrl())" class="img-responsive" alt="">
                     </div>
                     <!-- END SIDEBAR USERPIC -->
                     <!-- SIDEBAR USER TITLE -->
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
-                            Adel Reda
+                            @String.Concat(User.Identity.GetUserFName(), " ", User.Identity.GetUserLName())
                         </div>
                         <div class="profile-usertitle-job">
-                            Markting Director
+                            Admin
                         </div>
                         <div class="profile-usertitle-job">
-                            adelredaa97@gmail.com
+                            @User.Identity.GetUserEmail()
                         </div>
                         <div class="profile-usertitle-job">
-                            01279767022
+                            @User.Identity.GetUserPhoneNumber()
                         </div>
                     </div>
                     <!-- END SIDEBAR USER TITLE -->

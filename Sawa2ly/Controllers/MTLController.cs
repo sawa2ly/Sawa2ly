@@ -80,7 +80,9 @@ namespace Sawa2ly.Controllers
         {
             if (User.Identity.GetUserRule() == "3")
             {
-                return View();
+                var userId = User.Identity.GetUserID();
+                var user = db.Users.SingleOrDefault(c => c.Id == userId);
+                return View(user);
             }
             else
             {

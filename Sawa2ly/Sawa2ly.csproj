@@ -372,6 +372,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Sources\fontawesome-free-5.8.1-web\" />
+    <Folder Include="Sources\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

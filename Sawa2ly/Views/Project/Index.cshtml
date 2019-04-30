@@ -523,7 +523,7 @@
                                             </div>
                                         </div>
 
-                                        @foreach (var post in Model.Posts)
+                                        @foreach (var post in Model.Posts.OrderByDescending(c => c.Id))
                                         {
                                             <div class="card gedf-card" style="margin-bottom:30px;">
                                                 <div class="card-header">
